@@ -53,4 +53,4 @@ export function roll(command, message) {
 	}
 	else if (command.length < 2)
 		message.channel.send("```css\n" + message.author.username + " rolls " + "" + getRandomInt100() + " (1-100)" + "```");
- }
+}
