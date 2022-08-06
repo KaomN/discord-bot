@@ -1,1 +1,1 @@
-sudo node index.js
+sudo node index.mjs
