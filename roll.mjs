@@ -1,15 +1,16 @@
-// Returns a random integer between min(inclusive) and max(inclusive max).
+// Returns a random value between min(inclusive) and max(inclusive max).
 // min >= 1 && max <= Number.MAX_SAFE_INTEGER
 import crypto from "crypto"
+
 function getRandomIntBetween(min, max) {
 	return crypto.randomInt(min, max + 1)
 	//return Math.floor(Math.random() * (max - min + 1) + min);
 }
-// Returns a random integer between 1 and input max(inclusive).
+// Returns a random value between 1 and input max(inclusive).
 function getRandomInt(max) {
 	return crypto.randomInt(max + 1)
 }
-// Returns a random integer between 1 and 100.
+// Returns a random value between 1 and 100.
 function getRandomInt100() {
 	return crypto.randomInt(1, 101);
 	//return Math.floor(Math.random() * (100)) + 1;
