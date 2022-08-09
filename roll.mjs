@@ -6,7 +6,7 @@ function getRandomIntBetween(min, max) {
 }
 // Returns a random value between 1 and input max(inclusive).
 function getRandomInt(max) {
-	return crypto.randomInt(max + 1)
+	return crypto.randomInt(1, max + 1)
 }
 // Returns a random value between 1 and 100.
 function getRandomInt100() {
