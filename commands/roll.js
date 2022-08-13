@@ -56,6 +56,7 @@ exports.run = (message, args) => {
 			}
 		}
 	}
+	//if there is no argument roll from 1-100
 	else if (args.length < 1)
 		message.channel.send("```css\n" + message.author.username + " rolls " + "" + getRandomInt100() + " (1-100)" + "```");
 }
