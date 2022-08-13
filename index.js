@@ -2,8 +2,6 @@ const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const dotenv = require('dotenv');
 const fs = require("fs");
 dotenv.config();
-// Assigns prefix
-const prefix = "!";
 // New Discord Client
 const client = new Client({
 	// intents/permissions for the bot
@@ -14,10 +12,13 @@ const client = new Client({
 	]
 });
 client.commands = new Collection();
-
+// Read the Files in the Events Directory and filter files that ends with .js
 const events = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
+// Loop over each file
 for (const file of events) {
+	// Split the file at its extension and get the event name
 	const eventName = file.split(".")[0];
+	// Require the file
 	const event = require(`./events/${file}`);
 	client.on(eventName, event.bind(null, client));
 }

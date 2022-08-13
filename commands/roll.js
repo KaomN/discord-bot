@@ -1,4 +1,5 @@
-// Returns a random value between min(inclusive) and max(inclusive max).
+// !Roll returns a random value between 1-100 max inclusive.
+// Accepts 1 argument in format: x-y where x and y is min and max respectively.
 // min >= 1 && max <= Number.MAX_SAFE_INTEGER
 const crypto = require("crypto");
 
@@ -24,7 +25,7 @@ function isInt(val) {
 	return val % 1 === 0;
 }
 // main function
-exports.run = (message, args, command) => {
+exports.run = (message, args) => {
 	// Check if there is an argument
 	if (args.length === 1)
 	{
@@ -59,4 +60,4 @@ exports.run = (message, args, command) => {
 		message.channel.send("```css\n" + message.author.username + " rolls " + "" + getRandomInt100() + " (1-100)" + "```");
 }
 
-exports.name = "roll";
+//exports.name = "roll";
