@@ -60,5 +60,3 @@ exports.run = (message, args) => {
 	else if (args.length < 1)
 		message.channel.send("```css\n" + message.author.username + " rolls " + "" + getRandomInt100() + " (1-100)" + "```");
 }
-
-//exports.name = "roll";

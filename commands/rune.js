@@ -61,5 +61,3 @@ exports.run = (message, args) => {
 			return;
 	}
 }
-
-//exports.name = "rune";
