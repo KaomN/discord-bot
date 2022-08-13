@@ -27,7 +27,6 @@ function getGemQuality (index) {
 	else if (index >= 27 && index <= 32)
 		return 3;
 }
-
 exports.run = (message, args) => {
 	// Check if there is an argument
 	if (args.length === 1)
