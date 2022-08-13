@@ -37,5 +37,5 @@ exports.run = (message, args, client) => {
 exports.help = {
 	name: "help",
 	description: "Displays all commands.",
-	usage: "!help \u001b[1;37m| \u001b[1;32m!help \u001b[1;33m[command]"
+	usage: "!help \u001b[1;37m| \u001b[1;32m!help \u001b[1;33m[command]\u001b[0m"
 };
