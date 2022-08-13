@@ -51,8 +51,8 @@ exports.run = (message, args) => {
 		}
 		else if (index > 19 && index < 32)
 		{
-			// runes # 21-25 gem quality is normal
-			if (index >= 21 && index <= 25)
+			// runes # 21-26 does not have a gem quality
+			if (gemQualityIndex == 2)
 				message.channel.send("```css\n" + "2 " + runes[index] + " + " + gems[gemIndex] + " → 1 " + runes[index + 1] + "```");
 			else
 				message.channel.send("```css\n" + "2 " + runes[index] + " + " + gemQuality[gemQualityIndex] + " " + gems[gemIndex] + " → 1 " + runes[index + 1] + "```");
