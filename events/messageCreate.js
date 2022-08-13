@@ -16,7 +16,7 @@ module.exports = (client, message) => {
 	if (!cmd) return;
 	// Run the command
 	try {
-		cmd.run(message, args);
+		cmd.run(message, args, client);
 	} catch (error) {
 		console.log(error);
 		message.channel.send({ content: `There was a problem with your request.\n\`\`\`${e.message}\`\`\`` })
