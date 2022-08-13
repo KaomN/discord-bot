@@ -1,4 +1,4 @@
-// !Rune [arg] sends a message on what gems is needed to upgrade to the next rune
+// !Rune [arg] sends a message on what gem is needed to upgrade to the next rune
 const runes = [	"El", "Eld", "Tir", "Nef", "Eth", "Ith", "Tal", "Ral", "Ort",
 				"Thul", "Amn", "Sol", "Shael", "Dol", "Hel", "Io", "Lum", "Ko",
 				"Fal", "Lem", "Pul", "Um", "Mal", "Ist", "Gul", "Vex", "Ohm",
