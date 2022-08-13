@@ -24,7 +24,7 @@ function isNum(val){
 function isInt(val) {
 	return val % 1 === 0;
 }
-
+// Calculate colors for the roll
 function calcColors(min, max, val)
 {
 	var total = max - min + 1;
