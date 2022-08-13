@@ -1,4 +1,5 @@
-// !Rune [arg] sends a message on what gem is needed to upgrade to the next rune
+/* !rune [arg] sends a message on what gem is needed to upgrade to the next rune */
+const { codeBlock } = require("@discordjs/builders");
 const runes = [	"El", "Eld", "Tir", "Nef", "Eth", "Ith", "Tal", "Ral", "Ort",
 				"Thul", "Amn", "Sol", "Shael", "Dol", "Hel", "Io", "Lum", "Ko",
 				"Fal", "Lem", "Pul", "Um", "Mal", "Ist", "Gul", "Vex", "Ohm",
@@ -61,3 +62,9 @@ exports.run = (message, args) => {
 			return;
 	}
 }
+
+exports.help = {
+	name: "rune",
+	description: "Shows what gem is needed to upgrade to the next rune.",
+	usage: "!rune \u001b[1;33m[runename]"
+};
