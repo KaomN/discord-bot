@@ -40,7 +40,7 @@ exports.run = (message, args) => {
 		const gemIndex = getGem(index);
 		// Get the gem quality in array
 		const gemQualityIndex = getGemQuality(index);
-		// index 0-19 = 3 runes 20 and above = 2 runes Max 32 gems
+		// index 0-19 = 3 runes 20 and above = 2 runes Max 31 index
 		// index 9 and above needs gems
 		if (index >= 0 && index <= 19)
 		{
@@ -49,14 +49,15 @@ exports.run = (message, args) => {
 			else
 				message.channel.send("```css\n" + "3 " + runes[index] + " + " + gemQuality[gemQualityIndex] + " " + gems[gemIndex] + " → 1 " + runes[index + 1] + "```");
 		}
-		else if (index == 18 || (index < 32 && index >= 26))
+		else if (index > 19 && index < 32)
 		{
-			message.channel.send("```css\n" + "2 " + runes[index] + " + " + gemQuality[gemQualityIndex] + " " + gems[gemIndex] + " → 1 " + runes[index + 1] + "```");
+			// runes # 21-25 gem quality is normal
+			if (index >= 21 && index <= 25)
+				message.channel.send("```css\n" + "2 " + runes[index] + " + " + gems[gemIndex] + " → 1 " + runes[index + 1] + "```");
+			else
+				message.channel.send("```css\n" + "2 " + runes[index] + " + " + gemQuality[gemQualityIndex] + " " + gems[gemIndex] + " → 1 " + runes[index + 1] + "```");
 		}
-		else if (index >= 19 && index <= 25)
-		{
-			message.channel.send("```css\n" + "2 " + runes[index] + " + " + gems[gemIndex] + " → 1 " + runes[index + 1] + "```");
-		}
+		// if rune is not found exit silently
 		else
 			return;
 	}
