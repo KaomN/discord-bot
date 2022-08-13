@@ -1,16 +1,19 @@
-import crypto from "crypto"
 // Returns a random value between min(inclusive) and max(inclusive max).
 // min >= 1 && max <= Number.MAX_SAFE_INTEGER
+const crypto = require("crypto");
+
 function getRandomIntBetween(min, max) {
 	return crypto.randomInt(min, max + 1)
+	//return Math.floor(Math.random() * (max - min + 1) + min);
 }
 // Returns a random value between 1 and input max(inclusive).
 function getRandomInt(max) {
-	return crypto.randomInt(1, max + 1)
+	return crypto.randomInt(max + 1)
 }
 // Returns a random value between 1 and 100.
 function getRandomInt100() {
 	return crypto.randomInt(1, 101);
+	//return Math.floor(Math.random() * (100)) + 1;
 }
 // Check if value is a number
 function isNum(val){
@@ -21,11 +24,11 @@ function isInt(val) {
 	return val % 1 === 0;
 }
 // main function
-export function roll(command, message) {
+exports.run = (message, args, command) => {
 	// Check if there is an argument
-	if (command.length === 2)
+	if (args.length === 1)
 	{
-		const num = command[1].split("-");
+		const num = args[0].split("-");
 		// Check if there is one number as an argument
 		if (num.length === 1)
 		{
@@ -52,6 +55,8 @@ export function roll(command, message) {
 			}
 		}
 	}
-	else if (command.length < 2)
+	else if (args.length < 1)
 		message.channel.send("```css\n" + message.author.username + " rolls " + "" + getRandomInt100() + " (1-100)" + "```");
 }
+
+exports.name = "roll";
