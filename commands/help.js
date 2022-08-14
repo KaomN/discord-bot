@@ -27,7 +27,7 @@ exports.run = (message, args, client) => {
 		if (client.commands.has(command))
 		{
 			command = client.commands.get(command);
-			message.channel.send(codeBlock("ansi", `\u001b[1;34m= ${command.help.name} = \u001b[0m\n${command.help.description}\nusage :: ${command.help.usage}\n`));
+			message.channel.send(codeBlock("ansi", `\u001b[1;34m= ${command.help.name} = \u001b[0m\n${command.help.description}\n\u001b[1;31musage :: ${command.help.usage}\n`));
 		}
 		else
 			return message.channel.send("No command with that name");
@@ -37,5 +37,5 @@ exports.run = (message, args, client) => {
 exports.help = {
 	name: "help",
 	description: "Displays all commands.",
-	usage: "!help \u001b[1;37m| \u001b[1;32m!help \u001b[1;33m[command]\u001b[0m"
+	usage: "\u001b[1;32m!help \u001b[1;37m| \u001b[1;32m!help \u001b[1;33m[command]\u001b[0m"
 };
