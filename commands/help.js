@@ -16,7 +16,7 @@ exports.run = (message, args, client) => {
 		allCommands.forEach(c => {
 			command = client.commands.get(c)
 			// Add to the message for every command
-			output += "\u001b[1;32m!" + `${command.help.name}` + "\u001b[0m :: " + `\u001b[1;37m${command.help.description}\n` + "  " + `\u001b[1;31musage:\u001b[0m \u001b[1;32m${command.help.usage}\u001b[0m\n\n`;
+			output += "\u001b[1;32m!" + `${command.help.name}` + "\u001b[0m :: " + `\u001b[0;37m${command.help.description}\n` + "  " + `\u001b[0;31musage:\u001b[0m \u001b[0;32m${command.help.usage}\u001b[0m\n\n`;
 		});
 		message.channel.send(codeBlock("ansi", output));
 	}
@@ -27,7 +27,7 @@ exports.run = (message, args, client) => {
 		if (client.commands.has(command))
 		{
 			command = client.commands.get(command);
-			message.channel.send(codeBlock("ansi", `\u001b[1;34m= ${command.help.name} = \u001b[0m\n${command.help.description}\n\u001b[1;31musage :: ${command.help.usage}\n`));
+			message.channel.send(codeBlock("ansi", `\u001b[0;34m= ${command.help.name} = \u001b[0m\n${command.help.description}\n\u001b[0;31musage :: ${command.help.usage}\n`));
 		}
 		else
 			return message.channel.send("No command with that name");
@@ -37,5 +37,5 @@ exports.run = (message, args, client) => {
 exports.help = {
 	name: "help",
 	description: "Displays all commands.",
-	usage: "\u001b[1;32m!help \u001b[1;37m| \u001b[1;32m!help \u001b[1;33m[command]\u001b[0m"
+	usage: "\u001b[0;32m!help \u001b[0;37m| \u001b[0;32m!help \u001b[0;33m[command]\u001b[0m"
 };

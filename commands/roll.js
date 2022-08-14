@@ -68,7 +68,7 @@ exports.run = (message, args) => {
 				if (num1 != 0 && num[0][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num[0][0] != '+')
 				{
 					val = getRandomInt(num1);
-					message.channel.send(codeBlock("ansi", message.author.username + " \u001b[1;32mrolls " + `\u001b[1;${calcColors(1, num1, val)}m` + val + " \u001b[0m(\u001b[1;36m1\u001b[0m-" + "\u001b[1;36m" + num1 + "\u001b[0m)"));
+					message.channel.send(codeBlock("ansi", message.author.username + " \u001b[0;32mrolls " + `\u001b[0;${calcColors(1, num1, val)}m` + val + " \u001b[0m(\u001b[0;36m1\u001b[0m-" + "\u001b[0;36m" + num1 + "\u001b[0m)"));
 				}
 			}
 		}
@@ -84,7 +84,7 @@ exports.run = (message, args) => {
 				if (num2 >= num1 && num[0][0] != '0' && num[1][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num2 <= Number.MAX_SAFE_INTEGER)
 				{
 					val = getRandomIntBetween(num1, num2);
-					message.channel.send(codeBlock("ansi", message.author.username + " \u001b[1;32mrolls " + `\u001b[1;${calcColors(num1, num2, val)}m` + val + " \u001b[0m(" + "\u001b[1;36m" + num1 + "\u001b[0m-" + "\u001b[1;36m" + num2 + "\u001b[0m)"));
+					message.channel.send(codeBlock("ansi", message.author.username + " \u001b[0;32mrolls " + `\u001b[0;${calcColors(num1, num2, val)}m` + val + " \u001b[0m(" + "\u001b[0;36m" + num1 + "\u001b[0m-" + "\u001b[0;36m" + num2 + "\u001b[0m)"));
 				}
 			}
 		}
@@ -93,12 +93,12 @@ exports.run = (message, args) => {
 	else if (args.length < 1)
 	{
 		val = getRandomInt100();
-		message.channel.send(codeBlock("ansi", message.author.username + " \u001b[1;32mrolls " + `\u001b[1;${calcColors(1, 100, val)}m` + val + " \u001b[0m(\u001b[1;36m1\u001b[0m-\u001b[1;36m100\u001b[0m)"));
+		message.channel.send(codeBlock("ansi", message.author.username + " \u001b[0;32mrolls " + `\u001b[0;${calcColors(1, 100, val)}m` + val + " \u001b[0m(\u001b[0;36m1\u001b[0m-\u001b[0;36m100\u001b[0m)"));
 	}
 }
 //`\u001b[1;${test}m`
 exports.help = {
 	name: "roll",
 	description: "Returns a random value between 1-100 min and max inclusive.",
-	usage: "\u001b[1;32m!roll\u001b[1;37m | \u001b[1;32m!roll \u001b[1;33m[max] \u001b[1;37m| \u001b[1;32m!roll \u001b[1;33m[min-max]"
+	usage: "\u001b[0;32m!roll\u001b[0;37m | \u001b[0;32m!roll \u001b[0;33m[max] \u001b[0;37m| \u001b[0;32m!roll \u001b[0;33m[min-max]"
 };
