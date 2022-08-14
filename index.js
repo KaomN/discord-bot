@@ -11,6 +11,7 @@ const client = new Client({
 		GatewayIntentBits.MessageContent
 	]
 });
+// Create new collection to store the commands
 client.commands = new Collection();
 // Read the Files in the Events Directory and filter files that ends with .js
 const events = fs.readdirSync("./events").filter(file => file.endsWith(".js"));
@@ -24,13 +25,14 @@ for (const file of events) {
 }
 
 const commands = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
+// Loop over each file
 for (const file of commands) {
 	// Get the command name from splitting the file
 	const commandName = file.split(".")[0];
 	// Require the file
 	const command = require(`./commands/${file}`);
 	//console.log(`Attempting to load command ${commandName}`);
-	// Set the command to a collection
+	// Set the command to the collection
 	client.commands.set(commandName, command);
 }
 // write on stdout/console when bot is logged in
