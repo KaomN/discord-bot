@@ -93,7 +93,10 @@ exports.run = (message, args) => {
 	else if (args.length < 1)
 	{
 		val = getRandomInt100();
-		message.channel.send(codeBlock("ansi", message.author.username + " \u001b[0;32mrolls " + `\u001b[0;${calcColors(1, 100, val)}m` + val + " \u001b[0m(\u001b[0;36m1\u001b[0m-\u001b[0;36m100\u001b[0m)"));
+		if (val === 100)
+			message.channel.send(codeBlock("ansi", message.author.username + " \u001b[0;32mrolls " + "\u001b[0;33m✵\u001b[0;32m100\u001b[0;33m✵" + " \u001b[0m(\u001b[0;36m1\u001b[0m-\u001b[0;36m100\u001b[0m)"));
+		else
+			message.channel.send(codeBlock("ansi", message.author.username + " \u001b[0;32mrolls " + `\u001b[0;${calcColors(1, 100, val)}m` + val + " \u001b[0m(\u001b[0;36m1\u001b[0m-\u001b[0;36m100\u001b[0m)"));
 	}
 }
 //`\u001b[1;${test}m`
