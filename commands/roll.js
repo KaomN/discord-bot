@@ -14,7 +14,6 @@ function getRandomInt(max) {
 // Returns a random value between 1 and 100.
 function getRandomInt100() {
 	return crypto.randomInt(1, 101);
-	//return Math.floor(Math.random() * (100)) + 1;
 }
 // Check if value is a number
 function isNum(val){
@@ -41,8 +40,7 @@ function calcColors(min, max, val)
 	}
 	else
 	{
-		total = total / 3;
-		Math.ceil(total);
+		Math.ceil(total = total / 3);
 		if (val <= total)
 			return (31);
 		else if (val > total && val <= total * 2)
@@ -51,7 +49,7 @@ function calcColors(min, max, val)
 			return (36);
 	}
 }
-// main function
+// Main function
 exports.run = (message, args) => {
 	// Check if there is an argument
 	var val
@@ -70,7 +68,7 @@ exports.run = (message, args) => {
 				if (num1 != 0 && num[0][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num[0][0] != '+')
 				{
 					val = getRandomInt(num1);
-					message.channel.send(codeBlock("ansi", message.author.username + " \u001b[1;32mrolls " + "\u001b[1;36m" + `\u001b[1;${calcColors(1, num1, val)}m` + val + " \u001b[0m(\u001b[1;36m1\u001b[0m-" + "\u001b[1;36m" + num1 + "\u001b[0m)"));
+					message.channel.send(codeBlock("ansi", message.author.username + " \u001b[1;32mrolls " + `\u001b[1;${calcColors(1, num1, val)}m` + val + " \u001b[0m(\u001b[1;36m1\u001b[0m-" + "\u001b[1;36m" + num1 + "\u001b[0m)"));
 				}
 			}
 		}
@@ -86,7 +84,7 @@ exports.run = (message, args) => {
 				if (num2 >= num1 && num[0][0] != '0' && num[1][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num2 <= Number.MAX_SAFE_INTEGER)
 				{
 					val = getRandomIntBetween(num1, num2);
-					message.channel.send(codeBlock("ansi", message.author.username + " \u001b[1;32mrolls " + "\u001b[1;36m" + `\u001b[1;${calcColors(num1, num2, val)}m` + val + " \u001b[0m(" + "\u001b[1;36m" + num1 + "\u001b[0m-" + "\u001b[1;36m" + num2 + "\u001b[0m)"));
+					message.channel.send(codeBlock("ansi", message.author.username + " \u001b[1;32mrolls " + `\u001b[1;${calcColors(num1, num2, val)}m` + val + " \u001b[0m(" + "\u001b[1;36m" + num1 + "\u001b[0m-" + "\u001b[1;36m" + num2 + "\u001b[0m)"));
 				}
 			}
 		}
@@ -95,7 +93,7 @@ exports.run = (message, args) => {
 	else if (args.length < 1)
 	{
 		val = getRandomInt100();
-		message.channel.send(codeBlock("ansi", message.author.username + " \u001b[1;32mrolls " + "\u001b[1;36m" + `\u001b[1;${calcColors(1, 100, val)}m` + val + " \u001b[0m(\u001b[1;36m1\u001b[0m-\u001b[1;36m100\u001b[0m)"));
+		message.channel.send(codeBlock("ansi", message.author.username + " \u001b[1;32mrolls " + `\u001b[1;${calcColors(1, 100, val)}m` + val + " \u001b[0m(\u001b[1;36m1\u001b[0m-\u001b[1;36m100\u001b[0m)"));
 	}
 }
 //`\u001b[1;${test}m`

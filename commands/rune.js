@@ -28,6 +28,7 @@ function getGemQuality (index) {
 	else if (index >= 27 && index <= 32)
 		return 3;
 }
+// Get gem color
 function getGemColor(gemIndex)
 {
 	if (gemIndex === 0)
@@ -43,7 +44,7 @@ function getGemColor(gemIndex)
 	else if (gemIndex === 5)
 		return 37;
 }
-
+//Main function
 exports.run = (message, args) => {
 	// Check if there is an argument
 	if (args.length === 1)
