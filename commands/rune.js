@@ -82,6 +82,6 @@ exports.run = (message, args) => {
 
 exports.help = {
 	name: "rune",
-	description: "Shows what gem is needed to upgrade to the next rune.",
+	description: "\u001b[0;37mShows what gem is needed to upgrade to the next rune.",
 	usage: "\u001b[0;32m!rune \u001b[0;33m[runename]\u001b[0m"
 };

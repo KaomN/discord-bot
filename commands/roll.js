@@ -102,6 +102,6 @@ exports.run = (message, args) => {
 //`\u001b[1;${test}m`
 exports.help = {
 	name: "roll",
-	description: "Returns a random value between 1-100 min and max inclusive.",
+	description: "\u001b[0;37mReturns a random value between 1-100 min and max inclusive.",
 	usage: "\u001b[0;32m!roll\u001b[0;37m | \u001b[0;32m!roll \u001b[0;33m[max] \u001b[0;37m| \u001b[0;32m!roll \u001b[0;33m[min-max]"
 };
