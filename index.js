@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, Collection } = require("discord.js");
+const { Client, GatewayIntentBits, Collection, Message, MessageEmbed } = require("discord.js");
 const dotenv = require('dotenv');
 const fs = require("fs");
 dotenv.config();
@@ -8,7 +8,8 @@ const client = new Client({
 	intents: [
 		GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.MessageContent
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildPresences
 	]
 });
 // Create new collection to store the commands

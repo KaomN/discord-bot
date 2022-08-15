@@ -1,7 +1,10 @@
-// !roll returns a random value between 1-100 max inclusive.
-// Accepts 1 argument in format: <x-y> where x and y is min and max respectively.
-// min >= 1 && max <= Number.MAX_SAFE_INTEGER
+/*
+	!roll returns a random value between 1-100 max inclusive.
+	Accepts 1 argument in format: <x-y> where x and y is min and max respectively.
+	min >= 1 && max <= Number.MAX_SAFE_INTEGER
+*/
 const crypto = require("crypto");
+const devices = require("../modules/device.js");
 const { codeBlock } = require("@discordjs/builders");
 function getRandomIntBetween(min, max) {
 	return crypto.randomInt(min, max + 1)
@@ -49,11 +52,59 @@ function calcColors(min, max, val)
 			return (36);
 	}
 }
-// Main function
-exports.run = (message, args) => {
-	// Check if there is an argument
-	var val
-	var test = 31
+// Send message with CSS codeBlock
+function messageMobile(message, args)
+{
+	var val;
+	if (args.length === 1)
+	{
+		const num = args[0].split("-");
+		// Check if there is one number as an argument
+		if (num.length === 1)
+		{
+			// Check if valid number
+			if (isNum(num[0]) && isInt(num[0]))
+			{
+				const num1 = parseInt(num[0], 10);
+				// Check if valid number
+				if (num1 != 0 && num[0][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num[0][0] != '+')
+				{
+					val = getRandomInt(num1);
+					message.channel.send(codeBlock("css", message.author.username + " rolls " + val + " (1\-" + num1 + ")"));
+				}
+			}
+		}
+		// Check if there is two numbers as an argument
+		else if (num.length === 2 && isInt(num[0]) && isInt(num[1]))
+		{
+			// Check if valid numbers
+			if (isNum(num[0]) && isNum(num[1]) && num[0][0] != '-' && num[0][0] != '+' && num[1][0] != '-' && num[1][0] != '+')
+			{
+				const num1 = parseInt(num[0], 10);
+				const num2 = parseInt(num[1], 10);
+				// Check if valid numbers
+				if (num2 >= num1 && num[0][0] != '0' && num[1][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num2 <= Number.MAX_SAFE_INTEGER)
+				{
+					val = getRandomIntBetween(num1, num2);
+					message.channel.send(codeBlock("css", message.author.username + " rolls " + val + " (" + num1 + "-" + num2 + ")"));
+				}
+			}
+		}
+	}
+	//if there is no argument roll from 1-100
+	else if (args.length < 1)
+	{
+		val = getRandomInt100();
+		if (val === 100)
+			message.channel.send(codeBlock("css", message.author.username + " rolls " + "✵" + val + "✵" + " (1-00)"));
+		else
+			message.channel.send(codeBlock("css", message.author.username + " rolls " + val + " (1-100)"));
+	}
+}
+// Send message with ansi codeBlock
+function messageDesktop(message, args)
+{
+	var val;
 	if (args.length === 1)
 	{
 		const num = args[0].split("-");
@@ -99,9 +150,28 @@ exports.run = (message, args) => {
 			message.channel.send(codeBlock("ansi", message.author.username + " \u001b[0;32mrolls " + `\u001b[0;${calcColors(1, 100, val)}m` + val + " \u001b[0m(\u001b[0;36m1\u001b[0m-\u001b[0;36m100\u001b[0m)"));
 	}
 }
-//`\u001b[1;${test}m`
+
+//Main function
+exports.run = (message, args) => {
+	device = devices.getDevices(message);
+	if (device.web)
+		messageDesktop(message, args)
+	else if (device.mobile)
+		messageMobile(message, args)
+	else if (device.desktop)
+		messageDesktop(message, args)
+	else
+		messageMobile(message, args)
+}
+
 exports.help = {
 	name: "roll",
 	description: "\u001b[0;37mReturns a random value between 1-100 min and max inclusive.",
 	usage: "\u001b[0;32m!roll\u001b[0;37m | \u001b[0;32m!roll \u001b[0;33m[max] \u001b[0;37m| \u001b[0;32m!roll \u001b[0;33m[min-max]"
+};
+
+exports.helpMobile = {
+	name: "roll",
+	description: "Returns a random value between 1-100 min and max inclusive.",
+	usage: "!roll | !roll [max] | !roll [min-max]"
 };
