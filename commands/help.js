@@ -40,13 +40,18 @@ function help(message, args, client, device)
 		//Get names of the commands and save them in an array.
 		const allCommands = [...client.commands.keys()];
 		// Creating the message
-		let output = `${blue}` + "\t= Command List =\n";
-		var command;
+		if (device.mobile)
+			var output = `${blue}` + "\t= Command List =\n";
+		else
+			var output = `${blue}` + "\t= Command List =\n";
 		// Loop through the array
 		allCommands.forEach(c => {
-			command = client.commands.get(c)
+			var command = client.commands.get(c)
 			// Add to the message for every command
-			output += `${blue}` + "!" + `${command.help.name}` + `${reset}` + " :: " + `${white}` +`${command.help.description}` + "\n" + "  " + `${red}` + "usage" + `${reset}` +": " + `${green}` + `${command.help.usage}\n\n`;
+			if (device.mobile)
+				output += "!" + `${command.helpMobile.name}` + " :: " + `${command.helpMobile.description}` + "\n" + "  " + "usage" +": " + `${command.helpMobile.usage}\n\n`;
+			else
+				output += `${blue}` + "!" + `${command.help.name}` + `${reset}` + " :: " + `${white}` +`${command.help.description}` + "\n" + "  " + `${red}` + "usage" + `${reset}` +": " + `${green}` + `${command.help.usage}\n\n`;
 		});
 		message.channel.send(codeBlock(content, output));
 	}
@@ -57,7 +62,10 @@ function help(message, args, client, device)
 		if (client.commands.has(command))
 		{
 			command = client.commands.get(command);
-			message.channel.send(codeBlock(content, `${blue}` + `= ${command.help.name} =` + `\n${command.help.description}\n` `${red}` + "usage " + `${reset}` + ":: " + `${command.help.usage}\n`));
+			if (device.mobile)
+				message.channel.send(codeBlock(content, `= ${command.helpMobile.name} =` + `\n${command.helpMobile.description}\n` + "usage " + ":: " + `${command.helpMobile.usage}\n`));
+			else
+				message.channel.send(codeBlock(content, `${blue}` + `= ${command.help.name} =` + `\n${command.help.description}\n` `${red}` + "usage " + `${reset}` + ":: " + `${command.help.usage}\n`));
 		}
 		else
 			return message.channel.send(codeBlock(content,"No command with that name"));
