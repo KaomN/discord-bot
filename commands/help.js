@@ -5,23 +5,49 @@
 const { codeBlock } = require("@discordjs/builders");
 const devices = require("../modules/device.js");
 
-function messageMobile(message, args, client)
+function help(message, args, client, device)
 {
-	// If no specific command is called, show all commands.
+	if (device.mobile)
+	{
+		var green = "";
+		var red = "";
+		var blue = "";
+		var white = "";
+		var reset = "";
+		var content = "css";
+	}
+	else if (device.web || device.desktop)
+	{
+		var green = "\u001b[0;32m";
+		var red = "\u001b[0;31m";
+		var blue = "\u001b[0;34m";
+		var white = "\u001b[0;37m";
+		var reset = "\u001b[0m";
+		var content = "ansi";
+	}
+	else
+	{
+		var green = "";
+		var red = "";
+		var blue = "";
+		var white = "";
+		var reset = "";
+		var content = "css";
+	}
 	if (!args[0])
 	{
 		//Get names of the commands and save them in an array.
 		const allCommands = [...client.commands.keys()];
 		// Creating the message
-		let output = `= Command List =\n`;
+		let output = `${blue}` + "\t= Command List =\n";
 		var command;
 		// Loop through the array
 		allCommands.forEach(c => {
 			command = client.commands.get(c)
 			// Add to the message for every command
-			output += "!" + `${command.helpMobile.name}` + " :: " + `${command.helpMobile.description}\n` + "  " + `usage: ${command.helpMobile.usage}\n\n`;
+			output += `${blue}` + "!" + `${command.help.name}` + `${reset}` + " :: " + `${white}` +`${command.help.description}` + "\n" + "  " + `${red}` + "usage" + `${reset}` +": " + `${green}` + `${command.help.usage}\n\n`;
 		});
-		message.channel.send(codeBlock("css", output));
+		message.channel.send(codeBlock(content, output));
 	}
 	else
 	{
@@ -30,54 +56,16 @@ function messageMobile(message, args, client)
 		if (client.commands.has(command))
 		{
 			command = client.commands.get(command);
-			message.channel.send(codeBlock("css", `= ${command.helpMobile.name} =\n${command.helpMobile.description}\nusage :: ${command.helpMobile.usage}\n`));
+			message.channel.send(codeBlock(content, `${blue}` + `= ${command.help.name} =` + `\n${command.help.description}\n` `${red}` + "usage " + `${reset}` + ":: " + `${command.help.usage}\n`));
 		}
 		else
-			return message.channel.send("No command with that name");
+			return message.channel.send(codeBlock(content,"No command with that name"));
 	}
 }
 
-function messageDesktop(message, args, client)
-{
-	// If no specific command is called, show all commands.
-	if (!args[0])
-	{
-		//Get names of the commands and save them in an array.
-		const allCommands = [...client.commands.keys()];
-		// Creating the message
-		let output = `\u001b[1;34m= Command List =\n`;
-		var command;
-		// Loop through the array
-		allCommands.forEach(c => {
-			command = client.commands.get(c)
-			// Add to the message for every command
-			output += "\u001b[1;32m!" + `${command.help.name}` + "\u001b[0m :: " + `\u001b[0;37m${command.help.description}\n` + "  " + `\u001b[0;31musage:\u001b[0m \u001b[0;32m${command.help.usage}\u001b[0m\n\n`;
-		});
-		message.channel.send(codeBlock("ansi", output));
-	}
-	else
-	{
-		// Show individual commands help.
-		let command = args[0];
-		if (client.commands.has(command))
-		{
-			command = client.commands.get(command);
-			message.channel.send(codeBlock("ansi", `\u001b[0;34m= ${command.help.name} = \u001b[0m\n${command.help.description}\n\u001b[0;31musage :: ${command.help.usage}\n`));
-		}
-		else
-			return message.channel.send("No command with that name");
-	}
-}
 exports.run = (message, args, client) => {
-	const device = devices.getDevices(message)
-	if (device.web)
-		messageDesktop(message, args, client)
-	else if (device.mobile)
-		messageMobile(message, args, client)
-	else if (device.desktop)
-		messageDesktop(message, args, client)
-	else
-		messageMobile(message, args, client)
+	const device = devices.getDevices(message);
+	help(message, args, client, device);
 };
 
 exports.help = {

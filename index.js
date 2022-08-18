@@ -1,4 +1,4 @@
-const { Client, GatewayIntentBits, Collection, Message, MessageEmbed } = require("discord.js");
+const { Client, GatewayIntentBits, Collection, ActivityType } = require("discord.js");
 const dotenv = require('dotenv');
 const fs = require("fs");
 dotenv.config();
@@ -32,13 +32,22 @@ for (const file of commands) {
 	const commandName = file.split(".")[0];
 	// Require the file
 	const command = require(`./commands/${file}`);
-	//console.log(`Attempting to load command ${commandName}`);
+	//console.log(`Attempting to load command !${commandName}`);
 	// Set the command to the collection
 	client.commands.set(commandName, command);
 }
+
 // write on stdout/console when bot is logged in
-client.once('ready', () => {
-	console.log('Ready!');
+client.on("ready", () =>{
+	console.log("Ready!");
+	// Set custom activity
+	client.user.setPresence({
+		activities:
+		[
+			{ name: `with Krixxan`, type: ActivityType.Playing }
+		],
+		status: 'online'
+	  });
 });
 
 client.login(process.env.TOKEN);

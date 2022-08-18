@@ -27,34 +27,69 @@ function isInt(val) {
 	return val % 1 === 0;
 }
 // Calculate colors for the roll
-function calcColors(min, max, val)
+function calcColors(min, max, val, device)
 {
-	var total = max - min + 1;
-	if (total === 1)
+	if (device.mobile)
 	{
-		return 36;
+		return ("");
 	}
-	else if (total === 2)
+	else if (device.web || device.desktop)
 	{
-		if (val === 1)
-			return 31;
+		var total = max - min + 1;
+		if (total === 1)
+		{
+			return "\u001b[0;36m";
+		}
+		else if (total === 2)
+		{
+			if (val === 1)
+				return "\u001b[0;31m";
+			else
+				return "\u001b[0;36m";
+		}
 		else
-			return 36;
+		{
+			Math.ceil(total = total / 3);
+			if (val <= total)
+				return ("\u001b[0;31m");
+			else if (val > total && val <= total * 2)
+				return ("\u001b[0;33m");
+			else
+				return ("\u001b[0;36m");
+		}
 	}
 	else
 	{
-		Math.ceil(total = total / 3);
-		if (val <= total)
-			return (31);
-		else if (val > total && val <= total * 2)
-			return (33);
-		else
-			return (36);
+		return ("");
 	}
 }
-// Send message with CSS codeBlock
-function messageMobile(message, args)
+// Send message 
+function roll(message, args, device)
 {
+	if (device.mobile)
+	{
+		var green = "";
+		var cyan = "";
+		var white = "";
+		var yellow = "";
+		var content = "css";
+	}
+	else if (device.web || device.desktop)
+	{
+		var green = "\u001b[0;32m";
+		var cyan = "\u001b[0;36m";
+		var white = "\u001b[0;37m";
+		var yellow = "\u001b[0;33m";
+		var content = "ansi";
+	}
+	else
+	{
+		var green = "";
+		var cyan = "";
+		var white = "";
+		var yellow = "";
+		var content = "css";
+	}
 	var val;
 	if (args.length === 1)
 	{
@@ -70,7 +105,7 @@ function messageMobile(message, args)
 				if (num1 != 0 && num[0][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num[0][0] != '+')
 				{
 					val = getRandomInt(num1);
-					message.channel.send(codeBlock("css", message.author.username + " rolls " + val + " (1\-" + num1 + ")"));
+					message.channel.send(codeBlock(content,`${white}` + message.author.username + `${green}` + " rolls " + `${calcColors(1, num1, val, device)}` + val + " " + `${white}` + "(" + `${cyan}` + "1" + `${white}` + "-" + `${cyan}` + num1 + `${white}` +")"));
 				}
 			}
 		}
@@ -86,7 +121,7 @@ function messageMobile(message, args)
 				if (num2 >= num1 && num[0][0] != '0' && num[1][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num2 <= Number.MAX_SAFE_INTEGER)
 				{
 					val = getRandomIntBetween(num1, num2);
-					message.channel.send(codeBlock("css", message.author.username + " rolls " + val + " (" + num1 + "-" + num2 + ")"));
+					message.channel.send(codeBlock(content,`${white}` + message.author.username + `${green}` + " rolls " + `${calcColors(num1, num2, val, device)}` + val + `${white}` + " (" + `${cyan}` + num1 + `${white}` + "-" + `${cyan}` + num2 + `${white}` + ")"));
 				}
 			}
 		}
@@ -96,72 +131,16 @@ function messageMobile(message, args)
 	{
 		val = getRandomInt100();
 		if (val === 100)
-			message.channel.send(codeBlock("css", message.author.username + " rolls " + "✵" + val + "✵" + " (1-00)"));
+			message.channel.send(codeBlock(content,`${white}` + message.author.username + `${green}` + " rolls " + `${yellow}` + "✵" + `${green}` + "100" + `${yellow}` + "✵" + `${white}` + " (" + `${cyan}` + "1" + `${white}` + "-" +  `${cyan}` + "100" + `${white}` +")"));
 		else
-			message.channel.send(codeBlock("css", message.author.username + " rolls " + val + " (1-100)"));
-	}
-}
-// Send message with ansi codeBlock
-function messageDesktop(message, args)
-{
-	var val;
-	if (args.length === 1)
-	{
-		const num = args[0].split("-");
-		// Check if there is one number as an argument
-		if (num.length === 1)
-		{
-			// Check if valid number
-			if (isNum(num[0]) && isInt(num[0]))
-			{
-				const num1 = parseInt(num[0], 10);
-				// Check if valid number
-				if (num1 != 0 && num[0][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num[0][0] != '+')
-				{
-					val = getRandomInt(num1);
-					message.channel.send(codeBlock("ansi", message.author.username + " \u001b[0;32mrolls " + `\u001b[0;${calcColors(1, num1, val)}m` + val + " \u001b[0m(\u001b[0;36m1\u001b[0m-" + "\u001b[0;36m" + num1 + "\u001b[0m)"));
-				}
-			}
-		}
-		// Check if there is two numbers as an argument
-		else if (num.length === 2 && isInt(num[0]) && isInt(num[1]))
-		{
-			// Check if valid numbers
-			if (isNum(num[0]) && isNum(num[1]) && num[0][0] != '-' && num[0][0] != '+' && num[1][0] != '-' && num[1][0] != '+')
-			{
-				const num1 = parseInt(num[0], 10);
-				const num2 = parseInt(num[1], 10);
-				// Check if valid numbers
-				if (num2 >= num1 && num[0][0] != '0' && num[1][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num2 <= Number.MAX_SAFE_INTEGER)
-				{
-					val = getRandomIntBetween(num1, num2);
-					message.channel.send(codeBlock("ansi", message.author.username + " \u001b[0;32mrolls " + `\u001b[0;${calcColors(num1, num2, val)}m` + val + " \u001b[0m(" + "\u001b[0;36m" + num1 + "\u001b[0m-" + "\u001b[0;36m" + num2 + "\u001b[0m)"));
-				}
-			}
-		}
-	}
-	//if there is no argument roll from 1-100
-	else if (args.length < 1)
-	{
-		val = getRandomInt100();
-		if (val === 100)
-			message.channel.send(codeBlock("ansi", message.author.username + " \u001b[0;32mrolls " + "\u001b[0;33m✵\u001b[0;32m100\u001b[0;33m✵" + " \u001b[0m(\u001b[0;36m1\u001b[0m-\u001b[0;36m100\u001b[0m)"));
-		else
-			message.channel.send(codeBlock("ansi", message.author.username + " \u001b[0;32mrolls " + `\u001b[0;${calcColors(1, 100, val)}m` + val + " \u001b[0m(\u001b[0;36m1\u001b[0m-\u001b[0;36m100\u001b[0m)"));
+			message.channel.send(codeBlock(content,`${white}` + message.author.username + `${green}` + " rolls " + `${calcColors(1, 100, val, device)}` + val + `${white}` + " (" + `${cyan}` + "1" + `${white}` + "-" + `${cyan}` + "100" + `${white}` +")"));
 	}
 }
 
 //Main function
 exports.run = (message, args) => {
 	device = devices.getDevices(message);
-	if (device.web)
-		messageDesktop(message, args)
-	else if (device.mobile)
-		messageMobile(message, args)
-	else if (device.desktop)
-		messageDesktop(message, args)
-	else
-		messageMobile(message, args)
+	roll(message, args, device);
 }
 
 exports.help = {

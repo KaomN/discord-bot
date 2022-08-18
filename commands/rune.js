@@ -8,9 +8,8 @@ const runes = [	"El", "Eld", "Tir", "Nef", "Eth", "Ith", "Tal", "Ral", "Ort",
 				"Fal", "Lem", "Pul", "Um", "Mal", "Ist", "Gul", "Vex", "Ohm",
 				"Lo", "Sur", "Ber", "Jah", "Cham", "Zod"];
 const gems = ["Topaz", "Amethyst", "Sapphire", "Ruby", "Emerald", "Diamond"];
-const gemQuality = ["Chipped", "Flawed", "", "Flawless"];
 // Get the gem in array
-function getGem (index) {
+function getGem(index) {
 	if (index >= 9 && index <= 14)
 		return index - 9;
 	else if (index >= 15 && index <= 20)
@@ -21,114 +20,137 @@ function getGem (index) {
 		return index - 27;
 }
 // Get the gem quality in array
-function getGemQuality (index) {
+function getGemQuality(index) {
 	if (index >= 9 && index <= 14)
-		return 0;
+		return "Chipped";
 	else if (index >= 15 && index <= 20)
-		return 1;
+		return "Flawed";
 	else if (index >= 21 && index <= 26)
-		return 2;
+		return "";
 	else if (index >= 27 && index <= 32)
-		return 3;
+		return "Flawless";
 }
 // Get gem color
-function getGemColor(gemIndex)
+function getGemColor(gemIndex, device)
 {
-	if (gemIndex === 0)
-		return 33;
-	else if (gemIndex === 1)
-		return 35;
-	else if (gemIndex === 2)
-		return 34;
-	else if (gemIndex === 3)
-		return 31;
-	else if (gemIndex === 4)
-		return 32;
-	else if (gemIndex === 5)
-		return 37;
-}
-
-function messageMobile(message, args)
-{
-	if (args.length === 1)
+	if (device.mobile)
 	{
-		// Get the rune in array
-		const index = runes.findIndex(element => {
-			return element.toLowerCase() === args[0].toLowerCase();
-		});
-		// Get the gem in array
-		const gemIndex = getGem(index);
-		// Get the gem quality in array
-		const gemQualityIndex = getGemQuality(index);
-		// index 0-19 = 3 runes 20 and above = 2 runes Max 31 index
-		// index 9 and above needs gems
-		if (index >= 0 && index <= 19)
-		{
-			if (index < 9)
-				message.channel.send(codeBlock("css", "3 " + runes[index] + " → 1 " + runes[index + 1]));
-			else
-				message.channel.send(codeBlock("css", "3 " + runes[index] + " + " + gemQuality[gemQualityIndex] + " " + gems[gemIndex] + " → 1 " + runes[index + 1]));
-		}
-		else if (index > 19 && index < 32)
-		{
-			// runes # 21-26 does not have a gem quality
-			if (gemQualityIndex == 2)
-				message.channel.send(codeBlock("css", "2 " + runes[index] + " + " + gems[gemIndex] + " → 1 " + runes[index + 1]));
-			else
-				message.channel.send(codeBlock("css", "2 " + runes[index] + " + " + gemQuality[gemQualityIndex] + " " + gems[gemIndex] + " → 1 " + runes[index + 1]));
-		}
-		// if rune is not found exit silently
-		else
-			return;
+		return ("");
+	}
+	else if (device.web || device.desktop)
+	{
+		if (gemIndex === 0)
+			return "\u001b[0;33m";
+		else if (gemIndex === 1)
+			return "\u001b[0;35m";
+		else if (gemIndex === 2)
+			return "\u001b[0;34m";
+		else if (gemIndex === 3)
+			return "\u001b[0;31m";
+		else if (gemIndex === 4)
+			return "\u001b[0;32m";
+		else if (gemIndex === 5)
+			return "\u001b[0;37m";
+	}
+	else
+	{
+		return ("");
 	}
 }
 
-function messageDesktop(message, args)
+// function messageMobile(message, args)
+// {
+// 	if (args.length === 1)
+// 	{
+// 		// Get the rune in array
+// 		const index = runes.findIndex(element => {
+// 			return element.toLowerCase() === args[0].toLowerCase();
+// 		});
+// 		// Get the gem in array
+// 		const gemIndex = getGem(index);
+// 		// Get the gem quality in array
+// 		const gemQualityIndex = getGemQuality(index);
+// 		// index 0-19 = 3 runes 20 and above = 2 runes Max 31 index
+// 		// index 9 and above needs gems
+// 		if (index >= 0 && index <= 19)
+// 		{
+// 			if (index < 9)
+// 				message.channel.send(codeBlock("css", "3 " + runes[index] + " → 1 " + runes[index + 1]));
+// 			else
+// 				message.channel.send(codeBlock("css", "3 " + runes[index] + " + " + gemQuality[gemQualityIndex] + " " + gems[gemIndex] + " → 1 " + runes[index + 1]));
+// 		}
+// 		else if (index > 19 && index < 32)
+// 		{
+// 			// runes # 21-26 does not have a gem quality
+// 			if (gemQualityIndex == 2)
+// 				message.channel.send(codeBlock("css", "2 " + runes[index] + " + " + gems[gemIndex] + " → 1 " + runes[index + 1]));
+// 			else
+// 				message.channel.send(codeBlock("css", "2 " + runes[index] + " + " + gemQuality[gemQualityIndex] + " " + gems[gemIndex] + " → 1 " + runes[index + 1]));
+// 		}
+// 		// if rune is not found exit silently
+// 		else
+// 			return;
+// 	}
+// }
+
+function rune(message, args, device)
 {
-	if (args.length === 1)
+	// Initiate variables according to device type
+	if (device.mobile)
 	{
-		// Get the rune in array
-		const index = runes.findIndex(element => {
-			return element.toLowerCase() === args[0].toLowerCase();
-		});
-		// Get the gem in array
-		const gemIndex = getGem(index);
-		// Get the gem quality in array
-		const gemQualityIndex = getGemQuality(index);
-		// index 0-19 = 3 runes 20 and above = 2 runes Max 31 index
-		// index 9 and above needs gems
-		if (index >= 0 && index <= 19)
-		{
-			if (index < 9)
-				message.channel.send(codeBlock("ansi", "3 \u001b[0;33m" + runes[index] + "\u001b[0m → 1 \u001b[0;33m" + runes[index + 1]));
-			else
-				message.channel.send(codeBlock("ansi", "3 \u001b[0;33m" + runes[index] + "\u001b[0m + " + gemQuality[gemQualityIndex] + " " + `\u001b[0;${getGemColor(gemIndex)}m` + gems[gemIndex] + "\u001b[0m → 1 \u001b[0;33m" + runes[index + 1]));
-		}
-		else if (index > 19 && index < 32)
-		{
-			// runes # 21-26 does not have a gem quality
-			if (gemQualityIndex == 2)
-				message.channel.send(codeBlock("ansi", "2 \u001b[0;33m" + runes[index] + "\u001b[0m + " + `\u001b[1;${getGemColor(gemIndex)}m` + gems[gemIndex] + "\u001b[0m → 1 \u001b[1;33m" + runes[index + 1]));
-			else
-				message.channel.send(codeBlock("ansi", "2 \u001b[0;33m" + runes[index] + "\u001b[0m + " + gemQuality[gemQualityIndex] + " " + `\u001b[0;${getGemColor(gemIndex)}m` + gems[gemIndex] + "\u001b[0m → 1 \u001b[0;33m" + runes[index + 1]));
-		}
-		// if rune is not found exit silently
-		else
-			return;
+		var white = "";
+		var yellow = "";
+		var reset = "";
+		var content = "css";
 	}
+	else if (device.web || device.desktop)
+	{
+		var white = "\u001b[0;37m";
+		var yellow = "\u001b[0;33m";
+		var reset = "\u001b[0m";
+		var content = "ansi";
+	}
+	else
+	{
+		var white = "";
+		var yellow = "";
+		var content = "css";
+		var content = "css";
+	}
+	// Get the rune in array
+	const index = runes.findIndex(element => {
+		return element.toLowerCase() === args[0].toLowerCase();
+	});
+	// Get the gem in array
+	const gemIndex = getGem(index);
+	// Get the gem quality in array
+	const gemQualityIndex = getGemQuality(index);
+	// index 0-19 = 3 runes 20 and above = 2 runes Max 31 index
+	// index 9 and above needs gems
+	if (index >= 0 && index <= 19)
+	{
+		if (index < 9)
+			message.channel.send(codeBlock(content,`${white}` + "3 " + `${yellow}` + runes[index] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
+		else
+			message.channel.send(codeBlock(content,`${white}` + "3 " + `${yellow}` + runes[index] + " " + `${reset}` + getGemQuality(index) + " " + `${getGemColor(gemIndex, device)}` + gems[gemIndex] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
+	}
+	else if (index > 19 && index < 32)
+	{
+		// runes # 21-26 does not have a gem quality
+		if (getGemQuality(index) == "")
+			message.channel.send(codeBlock(content,`${white}` + "2 " + `${yellow}` + runes[index] + " " + `${getGemColor(gemIndex, device)}` + gems[gemIndex] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
+		else
+			message.channel.send(codeBlock(content,`${white}` + "2 " + `${yellow}` + runes[index] + " " + `${reset}` + getGemQuality(index) + " " + `${getGemColor(gemIndex, device)}` + gems[gemIndex] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
+	}
+	// if rune is not found exit silently
+	else
+		return;
 }
 
 //Main function
 exports.run = (message, args) => {
 	device = devices.getDevices(message);
-	if (device.web)
-		messageDesktop(message, args)
-	else if (device.mobile)
-		messageMobile(message, args)
-	else if (device.desktop)
-		messageDesktop(message, args)
-	else
-		messageMobile(message, args)
+	rune(message, args, device)
 }
 
 exports.help = {
