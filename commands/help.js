@@ -4,9 +4,10 @@
 */
 const { codeBlock } = require("@discordjs/builders");
 const devices = require("../modules/device.js");
-
+// Main function
 function help(message, args, client, device)
 {
+	// Initiate variables according to device type
 	if (device.mobile)
 	{
 		var green = "";
@@ -62,7 +63,7 @@ function help(message, args, client, device)
 			return message.channel.send(codeBlock(content,"No command with that name"));
 	}
 }
-
+// When the command is called
 exports.run = (message, args, client) => {
 	const device = devices.getDevices(message);
 	help(message, args, client, device);

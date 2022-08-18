@@ -63,7 +63,7 @@ function calcColors(min, max, val, device)
 		return ("");
 	}
 }
-// Send message 
+// Main function
 function roll(message, args, device)
 {
 	if (device.mobile)
@@ -137,7 +137,7 @@ function roll(message, args, device)
 	}
 }
 
-//Main function
+// When the command is called
 exports.run = (message, args) => {
 	device = devices.getDevices(message);
 	roll(message, args, device);
