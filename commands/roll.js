@@ -141,7 +141,7 @@ function roll(message, args, device)
 exports.run = (message, args) => {
 	device = devices.getDevices(message);
 	roll(message, args, device);
-}
+};
 
 exports.help = {
 	name: "roll",

@@ -51,21 +51,21 @@ function help(message, args, client, device)
 			if (device.mobile)
 				output += "!" + `${command.helpMobile.name}` + " :: " + `${command.helpMobile.description}` + "\n" + "  " + "usage" +": " + `${command.helpMobile.usage}\n\n`;
 			else
-				output += `${blue}` + "!" + `${command.help.name}` + `${reset}` + " :: " + `${white}` +`${command.help.description}` + "\n" + "  " + `${red}` + "usage" + `${reset}` +": " + `${green}` + `${command.help.usage}\n\n`;
+				output += `${blue}` + "!" + `${command.help.name}` + `${reset}` + " :: " + `${white}` + `${command.help.description}` + "\n" + "  " + `${red}` + "usage" + `${reset}` +": " + `${green}` + `${command.help.usage}\n\n`;
 		});
 		message.channel.send(codeBlock(content, output));
 	}
 	else
 	{
 		// Show individual commands help.
-		let command = args[0];
+		var command = args[0];
 		if (client.commands.has(command))
 		{
 			command = client.commands.get(command);
 			if (device.mobile)
 				message.channel.send(codeBlock(content, `= ${command.helpMobile.name} =` + `\n${command.helpMobile.description}\n` + "usage " + ":: " + `${command.helpMobile.usage}\n`));
 			else
-				message.channel.send(codeBlock(content, `${blue}` + `= ${command.help.name} =` + `\n${command.help.description}\n` `${red}` + "usage " + `${reset}` + ":: " + `${command.help.usage}\n`));
+				message.channel.send(codeBlock(content, `${blue}` + `= ${command.help.name} =` + `\n${command.help.description}\n` + `${red}` + "usage " + `${reset}` + ":: " + `${command.help.usage}\n`));
 		}
 		else
 			return message.channel.send(codeBlock(content,"No command with that name"));

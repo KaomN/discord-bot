@@ -32,22 +32,22 @@ for (const file of commands) {
 	const commandName = file.split(".")[0];
 	// Require the file
 	const command = require(`./commands/${file}`);
-	//console.log(`Attempting to load command !${commandName}`);
+	console.log(`Attempting to load command !${commandName}`);
 	// Set the command to the collection
 	client.commands.set(commandName, command);
 }
 
 // write on stdout/console when bot is logged in
 client.on("ready", () =>{
-	console.log("Ready!");
+	console.log("Ready! Logged in with " + client.user.username);
 	// Set custom activity
 	client.user.setPresence({
 		activities:
 		[
-			{ name: `with Krixxan`, type: ActivityType.Playing }
+			{ name: `Krixxan`,  type: 2 },
 		],
 		status: 'online'
-	  });
+	});
 });
 
 client.login(process.env.TOKEN);
