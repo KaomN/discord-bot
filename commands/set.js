@@ -10,7 +10,6 @@ const { codeBlock } = require("@discordjs/builders");
 // When the command is called
 exports.run = (message, args, client) => {
 	var name = args.slice(2).join(" ");
-	//console.log(name);
 	if (args[0].toLowerCase() == "status")
 	{
 		if (args[1].toLowerCase() == "dnd")
