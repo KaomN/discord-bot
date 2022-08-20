@@ -82,34 +82,63 @@ function rune(message, args, device)
 		var content = "css";
 		var content = "css";
 	}
-	// Get the rune in array
-	const index = runes.findIndex(element => {
-		return element.toLowerCase() === args[0].toLowerCase();
-	});
-	// Get the gem in array
-	const gemIndex = getGem(index);
-	// Get the gem quality in array
-	const gemQualityIndex = getGemQuality(index);
-	// index 0-19 = 3 runes 20 and above = 2 runes Max 31 index
-	// index 9 and above needs gems
-	if (index >= 0 && index <= 19)
+	if (args[0] === "list")
 	{
-		if (index < 9)
-			message.channel.send(codeBlock(content,`${white}` + "3 " + `${yellow}` + runes[index] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
-		else
-			message.channel.send(codeBlock(content,`${white}` + "3 " + `${yellow}` + runes[index] + " " + `${reset}` + getGemQuality(index) + " " + `${getGemColor(gemIndex, device)}` + gems[gemIndex] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
+		var list = "\u001b[0;33m";
+		var x = 0;
+		var y = 17;
+		while (x <= 16)
+		{
+			if (y == 33)
+				list += (x + 1) + ": " + runes[x];
+			else
+			{
+				if(x < 9)
+					list += " ";
+				if (runes[x].length == 2)
+					list += (x + 1) + ": " + runes[x] + "\t\t " + (y + 1) + ": " + runes[y] + "\n";
+				else if (runes[x].length == 4)
+					list += (x + 1) + ": " + runes[x] + "\t   " + (y + 1) + ": " + runes[y] + "\n";
+				else if (runes[x].length == 5)
+					list += (x + 1) + ": " + runes[x] + "\t  " + (y + 1) + ": " + runes[y] + "\n";
+				else
+					list += (x + 1) + ": " + runes[x] + "\t\t" + (y + 1) + ": " + runes[y] + "\n";
+			}
+			x++;
+			y++;
+		}
+		message.channel.send(codeBlock(content, `${list}`));
 	}
-	else if (index > 19 && index < 32)
-	{
-		// runes # 21-26 does not have a gem quality
-		if (getGemQuality(index) == "")
-			message.channel.send(codeBlock(content,`${white}` + "2 " + `${yellow}` + runes[index] + " " + `${getGemColor(gemIndex, device)}` + gems[gemIndex] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
-		else
-			message.channel.send(codeBlock(content,`${white}` + "2 " + `${yellow}` + runes[index] + " " + `${reset}` + getGemQuality(index) + " " + `${getGemColor(gemIndex, device)}` + gems[gemIndex] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
-	}
-	// if rune is not found exit silently
 	else
-		return;
+	{
+		// Get the rune in array
+		const index = runes.findIndex(element => {
+			return element.toLowerCase() === args[0].toLowerCase();
+		});
+		// Get the gem in array
+		const gemIndex = getGem(index);
+		// Get the gem quality in array
+		const gemQualityIndex = getGemQuality(index);
+		// index 0-19 = 3 runes 20 and above = 2 runes Max 31 index
+		// index 9 and above needs gems
+		if (index >= 0 && index <= 19)
+		{
+			if (index < 9)
+				message.channel.send(codeBlock(content,`${white}` + "3 " + `${yellow}` + runes[index] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
+			else
+				message.channel.send(codeBlock(content,`${white}` + "3 " + `${yellow}` + runes[index] + " " + `${reset}` + getGemQuality(index) + " " + `${getGemColor(gemIndex, device)}` + gems[gemIndex] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
+		}
+		else if (index > 19 && index < 32)
+		{
+			// runes # 21-26 does not have a gem quality
+			if (getGemQuality(index) == "")
+				message.channel.send(codeBlock(content,`${white}` + "2 " + `${yellow}` + runes[index] + " " + `${getGemColor(gemIndex, device)}` + gems[gemIndex] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
+			else
+				message.channel.send(codeBlock(content,`${white}` + "2 " + `${yellow}` + runes[index] + " " + `${reset}` + getGemQuality(index) + " " + `${getGemColor(gemIndex, device)}` + gems[gemIndex] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
+		}
+		else
+			return;
+	}
 }
 
 // When the command is called
