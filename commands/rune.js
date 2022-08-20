@@ -149,12 +149,12 @@ exports.run = (message, args) => {
 
 exports.help = {
 	name: "rune",
-	description: "\u001b[0;37mShows what gem is needed to upgrade to the next rune.",
-	usage: "\u001b[0;32m!rune \u001b[0;33m[runename]\u001b[0m"
+	description: "\u001b[0;37mShows what gem is needed to upgrade to the next rune, or list to list runes",
+	usage: "\u001b[0;32m!rune \u001b[0;33m[runename]\u001b[0m \u001b[0;37m| \u001b[0;32m!rune \u001b[0;33m[list]"
 };
 
 exports.helpMobile = {
 	name: "rune",
-	description: "Shows what gem is needed to upgrade to the next rune.",
-	usage: "!rune [runename]"
+	description: "Shows what gem is needed to upgrade to the next rune, or list to list runes",
+	usage: "!rune [runename] | !rune list"
 };
