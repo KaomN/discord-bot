@@ -39,7 +39,7 @@ for (const file of commands) {
 
 // write on stdout/console when bot is logged in
 client.on("ready", () =>{
-	console.log("Ready! Logged in with " + client.user.username);
+	console.log("Ready! Logged in as " + client.user.username);
 	// Set custom activity
 	client.user.setPresence({
 		activities:
