@@ -135,3 +135,9 @@ exports.help = {
 	description: "\u001b[0;37mStarts a game of deathroll. After starting the game typing roll, rolls a value for you",
 	usage: "\u001b[0;32m!deathroll \u001b[0;33m[playerNames] \u001b[0;33m[...] \u001b[0;37m| \u001b[0;32m!deathroll \u001b[0;33m[maxRollValue] \u001b[0;33m[playerNames] \u001b[0;33m[...]\u001b[0m"
 };
+
+exports.helpMobile = {
+	name: "deathroll",
+	description: "Starts a game of deathroll. After starting the game typing roll, rolls a value for you",
+	usage: "!deathroll [playerNames] [...] | !deathroll [maxRollValue] [playerNames] [...]"
+};
