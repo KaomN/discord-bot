@@ -119,8 +119,13 @@ exports.run = (message, args, client) => {
 		}
 		else if (message.content.toLowerCase() == "stop")
 		{
-			message.channel.send(codeBlock("ansi", "Stopping Deathroll"));
-			collector.stop();
+			if(arrayPlayers.includes(message.author.username))
+			{
+				message.channel.send(codeBlock("ansi", "Stopping Deathroll"));
+				collector.stop();
+			}
+			else
+				message.channel.send(codeBlock("ansi", `${white}` + "You do not have permission to stop the game" + `${red}` + message.author.username + `${white}` + "!"))
 		}
 	})
 };
