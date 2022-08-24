@@ -125,7 +125,7 @@ exports.run = (message, args, client) => {
 				collector.stop();
 			}
 			else
-				message.channel.send(codeBlock("ansi", `${white}` + "You do not have permission to stop the game" + `${red}` + message.author.username + `${white}` + "!"))
+				message.channel.send(codeBlock("ansi", `${white}` + "You do not have permission to stop the game " + `${red}` + message.author.username + `${white}` + "!"))
 		}
 	})
 };
