@@ -42,7 +42,7 @@ function roll(message, args, max, start, arrayPlayers, collector)
 		message.channel.send(codeBlock("ansi", "\t\t  ." + "\n\t\t -|-" + "\n\t\t  |" + "\n\t  .-'~~~`-." + "\n\t.'         `." + "\n\t|  R  I  P  |" + "\n\t|           |" + "\n\t|           |" + "\n  \\\\|           |//"));
 		collector.stop();
 	}
-	else //if (message.author.username.toLowerCase() === args[start].toLowerCase())
+	else if (message.author.username.toLowerCase() === arrayPlayers[start].toLowerCase())
 	{
 		message.channel.send(codeBlock("ansi", `${white}` + `${arrayPlayers[start]}` + `${green}` + " rolls " + `${cyan}` + `${max}` + " " + `${white}` + "(" + `${cyan}` + "1" + `${white}` + "-" + `${cyan}` + `${lastVal}` + `${white}` + ")" + "\n" + `${yellow}` + `${arrayPlayers[next]}` + "'s" + `${white}` + " turn to roll!"));
 	}
