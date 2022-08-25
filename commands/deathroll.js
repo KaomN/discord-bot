@@ -20,7 +20,7 @@ function getRandomstart(max) {
 	return crypto.randomInt(0, max);
 }
 
-// Capitalize forst character in a string
+// Capitalize first character in a string
 function capitalizeWords(arr)
 {
 	return arr.map(element => {
@@ -38,8 +38,7 @@ function roll(message, args, max, start, arrayPlayers, collector)
 		next = 0;
 	if (max === 1)
 	{
-		message.channel.send(codeBlock("ansi",`${white}` + `${arrayPlayers[start]}` + `${green}` + " rolls " + `${cyan}` + `${max}` + " " + `${white}` + "(" + `${cyan}` + "1" + `${white}` + "-" + `${cyan}` + `${lastVal}` + `${white}` + ")"));
-		message.channel.send(codeBlock("ansi", "\t\t  ." + "\n\t\t -|-" + "\n\t\t  |" + "\n\t  .-'~~~`-." + "\n\t.'         `." + "\n\t|  R  I  P  |" + "\n\t|           |" + "\n\t|           |" + "\n  \\\\|           |//"));
+		message.channel.send(codeBlock("ansi",`${white}` + `${arrayPlayers[start]}` + `${green}` + " rolls " + `${cyan}` + `${max}` + " " + `${white}` + "(" + `${cyan}` + "1" + `${white}` + "-" + `${cyan}` + `${lastVal}` + `${white}` + ")" + "\n" + "\t\t  ." + "\n\t\t -|-" + "\n\t\t  |" + "\n\t  .-'~~~`-." + "\n\t.'         `." + "\n\t|  R  I  P  |" + "\n\t|           |" + "\n\t|           |" + "\n  \\\\|           |//"));
 		collector.stop();
 	}
 	else if (message.author.username.toLowerCase() === arrayPlayers[start].toLowerCase())
@@ -78,6 +77,7 @@ exports.run = (message, args, client) => {
 		{
 			arrayPlayers[index] = this[index];
 		}, args);
+		// shifts first argument
 		arrayPlayers.shift();
 		max = args.shift();
 		// Adding colors to playernames
