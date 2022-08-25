@@ -9,6 +9,7 @@ var white = "\u001b[0;37m";
 var yellow = "\u001b[0;33m";
 var blue = "\u001b[0;34m";
 var red = "\u001b[0;31m";
+var noColor = "\u001b[0m";
 
 // Returns a random value between 1 and input max(inclusive).
 function getRandomInt(max) {
@@ -38,7 +39,7 @@ function roll(message, args, max, start, arrayPlayers, collector)
 		next = 0;
 	if (max === 1)
 	{
-		message.channel.send(codeBlock("ansi",`${white}` + `${arrayPlayers[start]}` + `${green}` + " rolls " + `${cyan}` + `${max}` + " " + `${white}` + "(" + `${cyan}` + "1" + `${white}` + "-" + `${cyan}` + `${lastVal}` + `${white}` + ")" + "\n" + "\t\t  ." + "\n\t\t -|-" + "\n\t\t  |" + "\n\t  .-'~~~`-." + "\n\t.'         `." + "\n\t|  R  I  P  |" + "\n\t|           |" + "\n\t|           |" + "\n  \\\\|           |//"));
+		message.channel.send(codeBlock("ansi",`${white}` + `${arrayPlayers[start]}` + `${green}` + " rolls " + `${cyan}` + `${max}` + " " + `${white}` + "(" + `${cyan}` + "1" + `${white}` + "-" + `${cyan}` + `${lastVal}` + `${white}` + ")" + "\n" + `${yellow}` + "\t\t  ." + "\n\t\t -|-" + "\n\t\t  |" + `${noColor}` + "\n\t  .-'~~~`-." + "\n\t.'         `." + "\n\t|" + `${white}` + "   R.I.P   " + `${noColor}` + "|" + "\n\t|           |" + "\n\t|           |" + `${green}` + "\n  \\\\" + `${noColor}` + "|           |" + `${green}` + "//"));
 		collector.stop();
 	}
 	else if (message.author.username.toLowerCase() === arrayPlayers[start].toLowerCase())
@@ -46,6 +47,42 @@ function roll(message, args, max, start, arrayPlayers, collector)
 		message.channel.send(codeBlock("ansi", `${white}` + `${arrayPlayers[start]}` + `${green}` + " rolls " + `${cyan}` + `${max}` + " " + `${white}` + "(" + `${cyan}` + "1" + `${white}` + "-" + `${cyan}` + `${lastVal}` + `${white}` + ")" + "\n" + `${yellow}` + `${arrayPlayers[next]}` + "'s" + `${white}` + " turn to roll!"));
 	}
 	return max;
+}
+
+function startMessageCollector(message, args, max, start, arrayPlayers)
+{
+	const collector = new MessageCollector(message.channel);
+	collector.on('collect', message =>
+	{
+		if (message.content.toLowerCase() == "roll")
+		{
+			if (message.author.username.toLowerCase() === arrayPlayers[start].toLowerCase())
+			{	
+				max = roll(message, args, max, start, arrayPlayers, collector);
+				start++;
+				if (start == arrayPlayers.length)
+					start = 0;
+			}
+			else if (!(arrayPlayers.includes(message.author.username)))
+			{
+				message.channel.send(codeBlock("ansi", `${white}` + "You cant play in this game " + `${red}` + message.author.username + `${white}` + "!"));
+			}
+			else
+			{
+				message.channel.send(codeBlock("ansi", `${white}` + "Wait for your turn " + `${red}` + message.author.username + `${white}` + ", it is " + `${yellow}` + arrayPlayers[start] + "'s " + `${white}` + "turn!"));
+			}
+		}
+		else if (message.content.toLowerCase() == "stop")
+		{
+			if(arrayPlayers.includes(message.author.username))
+			{
+				message.channel.send(codeBlock("ansi", "Stopping Deathroll"));
+				collector.stop();
+			}
+			else
+				message.channel.send(codeBlock("ansi", `${white}` + "You do not have permission to stop the game " + `${red}` + message.author.username + `${white}` + "!"));
+		}
+	})
 }
 
 exports.run = (message, args, client) => {
@@ -95,39 +132,8 @@ exports.run = (message, args, client) => {
 	// Exit if started with no players
 	if (users === "" || arrayPlayers.length === 0)
 		return;
-	message.channel.send(codeBlock("ansi", `${blue}` + message.author.username + `${white}` + " started a Deathroll 1-" + `${max}` + `${white}` +"\nPlayers: " + `${green}` + message.author.username + `${white}` + ", " + users + "\n" + `${yellow}` + `${arrayPlayers[start]}` + `${white}` + " starts!"))
-	const collector = new MessageCollector(message.channel);
-	collector.on('collect', message =>
-	{
-		if (message.content.toLowerCase() == "roll")
-		{
-			if (message.author.username.toLowerCase() === arrayPlayers[start].toLowerCase())
-			{	
-				max = roll(message, args, max, start, arrayPlayers, collector);
-				start++;
-				if (start == arrayPlayers.length)
-					start = 0;
-			}
-			else if (!(arrayPlayers.includes(message.author.username)))
-			{
-				message.channel.send(codeBlock("ansi", `${white}` + "You cant play in this game " + `${red}` + message.author.username + `${white}` + "!"))
-			}
-			else
-			{
-				message.channel.send(codeBlock("ansi", `${white}` + "Wait for your turn " + `${red}` + message.author.username + `${white}` + ", it is " + `${yellow}` + arrayPlayers[start] + "'s " + `${white}` + "turn!"))
-			}
-		}
-		else if (message.content.toLowerCase() == "stop")
-		{
-			if(arrayPlayers.includes(message.author.username))
-			{
-				message.channel.send(codeBlock("ansi", "Stopping Deathroll"));
-				collector.stop();
-			}
-			else
-				message.channel.send(codeBlock("ansi", `${white}` + "You do not have permission to stop the game " + `${red}` + message.author.username + `${white}` + "!"))
-		}
-	})
+	message.channel.send(codeBlock("ansi", `${blue}` + message.author.username + `${white}` + " started a Deathroll 1-" + `${max}` + `${white}` +"\nPlayers: " + `${green}` + message.author.username + `${white}` + ", " + users + "\n" + `${yellow}` + `${arrayPlayers[start]}` + `${white}` + " starts!"));
+	startMessageCollector(message, args, max, start, arrayPlayers);
 };
 
 exports.help = {
