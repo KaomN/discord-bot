@@ -1,4 +1,4 @@
-module.exports = async (client, message) => {
+module.exports = (client, message) => {
 	const prefix = "!"
 	// Ignore messages not starting with the prefix, or from bots
 	if (!message.content.startsWith(prefix) || message.author.bot)
@@ -14,7 +14,7 @@ module.exports = async (client, message) => {
 		return;
 	// Run the command
 	try {
-		await cmd.run(message, args, client);
+		cmd.run(message, args, client);
 	} catch (error) {
 		console.log(error);
 		message.channel.send({ content: `There was a problem with your request.\n\`\`\`${e.message}\`\`\`` })

@@ -2,6 +2,7 @@ const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const dotenv = require('dotenv');
 const fs = require("fs");
 dotenv.config();
+
 // New Discord Client
 const client = new Client({
 	// intents/permissions for the bot
@@ -12,7 +13,9 @@ const client = new Client({
 		GatewayIntentBits.GuildPresences
 	]
 });
-const init = async () => {
+
+function init()
+{
 	// Create new collection to store the commands
 	client.commands = new Collection();
 	// Read the Files in the Events Directory and filter files that ends with .js
