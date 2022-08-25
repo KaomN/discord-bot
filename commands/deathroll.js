@@ -63,11 +63,7 @@ function startMessageCollector(message, args, max, start, arrayPlayers)
 				if (start == arrayPlayers.length)
 					start = 0;
 			}
-			else if (!(arrayPlayers.includes(message.author.username)))
-			{
-				message.channel.send(codeBlock("ansi", `${white}` + "You cant play in this game " + `${red}` + message.author.username + `${white}` + "!"));
-			}
-			else
+			else if (arrayPlayers.includes(message.author.username))
 			{
 				message.channel.send(codeBlock("ansi", `${white}` + "Wait for your turn " + `${red}` + message.author.username + `${white}` + ", it is " + `${yellow}` + arrayPlayers[start] + "'s " + `${white}` + "turn!"));
 			}
@@ -79,8 +75,6 @@ function startMessageCollector(message, args, max, start, arrayPlayers)
 				message.channel.send(codeBlock("ansi", "Stopping Deathroll"));
 				collector.stop();
 			}
-			else
-				message.channel.send(codeBlock("ansi", `${white}` + "You do not have permission to stop the game " + `${red}` + message.author.username + `${white}` + "!"));
 		}
 	})
 }
