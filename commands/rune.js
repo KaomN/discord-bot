@@ -117,24 +117,23 @@ function rune(message, args, device)
 		});
 		// Get the gem in array
 		const gemIndex = getGem(index);
-		// Get the gem quality in array
-		const gemQualityIndex = getGemQuality(index);
+
 		// index 0-19 = 3 runes 20 and above = 2 runes Max 31 index
 		// index 9 and above needs gems
 		if (index >= 0 && index <= 19)
 		{
 			if (index < 9)
-				message.channel.send(codeBlock(content,`${white}` + "3 " + `${yellow}` + runes[index] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
+				message.channel.send(codeBlock(content,`${white}3 ${yellow}${runes[index]}${reset} → ${white}1 ${yellow}${runes[index + 1]}`));
 			else
-				message.channel.send(codeBlock(content,`${white}` + "3 " + `${yellow}` + runes[index] + " " + `${reset}` + getGemQuality(index) + " " + `${getGemColor(gemIndex, device)}` + gems[gemIndex] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
+				message.channel.send(codeBlock(content,`${white}3 ${yellow}${runes[index]} ${reset}${getGemQuality(index)} ${getGemColor(gemIndex, device)}${gems[gemIndex]}${reset} → ${white}1 ${yellow}${runes[index + 1]}`));
 		}
 		else if (index > 19 && index < 32)
 		{
 			// runes # 21-26 does not have a gem quality
 			if (getGemQuality(index) == "")
-				message.channel.send(codeBlock(content,`${white}` + "2 " + `${yellow}` + runes[index] + " " + `${getGemColor(gemIndex, device)}` + gems[gemIndex] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
+				message.channel.send(codeBlock(content,`${white}2 ${yellow}${runes[index]} ${getGemColor(gemIndex, device)}${gems[gemIndex]}${reset} → ${white}1 ${yellow}${runes[index + 1]}`));
 			else
-				message.channel.send(codeBlock(content,`${white}` + "2 " + `${yellow}` + runes[index] + " " + `${reset}` + getGemQuality(index) + " " + `${getGemColor(gemIndex, device)}` + gems[gemIndex] + `${reset}` + " → " + `${white}` + "1 " + `${yellow}` + runes[index + 1]));
+				message.channel.send(codeBlock(content,`${white}2 ${yellow}${runes[index]} ${reset}${getGemQuality(index)} ${getGemColor(gemIndex, device)}${gems[gemIndex]}${reset} → ${white}1 ${yellow}${runes[index + 1]}`));
 		}
 		else
 			return;
@@ -150,7 +149,7 @@ exports.run = (message, args) => {
 exports.help = {
 	name: "rune",
 	description: "\u001b[0;37mShows what gem is needed to upgrade to the next rune, or list to list runes",
-	usage: "\u001b[0;32m!rune \u001b[0;33m[runename]\u001b[0m \u001b[0;37m| \u001b[0;32m!rune \u001b[0;33m[list]"
+	usage: "\u001b[0;37m!\u001b[0;32mrune \u001b[0;33m[runename]\u001b[0m \u001b[0;37m| !\u001b[0;32mrune \u001b[0;33m[list]"
 };
 
 exports.helpMobile = {

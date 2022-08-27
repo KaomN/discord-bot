@@ -41,7 +41,7 @@ exports.run = (message, args, client) => {
 exports.help = {
 	name: "set",
 	description: "\u001b[0;37mSets bot activity/status.",
-	usage: "\u001b[0;32m!set \u001b[0;33m[activity] \u001b[0;33m[playing/streaming/listening/watching/competing] \u001b[0;33m[string]\n\t\t\ \u001b[0;32m!set \u001b[0;33m[status] \u001b[0;33m[online/dnd/idle]"
+	usage: "\u001b[0;37m!\u001b[0;32mset \u001b[0;33m[activity] \u001b[0;33m[playing/streaming/listening/watching/competing] \u001b[0;33m[string]\n\t\t\ \u001b[0;37m!\u001b[0;32mset \u001b[0;33m[status] \u001b[0;33m[online/dnd/idle]"
 };
 
 exports.helpMobile = {

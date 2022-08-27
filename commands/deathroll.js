@@ -39,12 +39,12 @@ function roll(message, args, max, start, arrayPlayers, collector)
 		next = 0;
 	if (max === 1)
 	{
-		message.channel.send(codeBlock("ansi",`${white}` + `${arrayPlayers[start]}` + `${green}` + " rolls " + `${cyan}` + `${max}` + " " + `${white}` + "(" + `${cyan}` + "1" + `${white}` + "-" + `${cyan}` + `${lastVal}` + `${white}` + ")" + "\n" + `${yellow}` + "\t\t  ." + "\n\t\t -|-" + "\n\t\t  |" + `${noColor}` + "\n\t  .-'~~~`-." + "\n\t.'         `." + "\n\t|" + `${white}` + "   R.I.P   " + `${noColor}` + "|" + "\n\t|           |" + "\n\t|           |" + `${green}` + "\n  \\\\" + `${noColor}` + "|           |" + `${green}` + "//"));
+		message.channel.send(codeBlock("ansi", `${white}${arrayPlayers[start]}${green} rolls ${cyan}${max} ${white}(${cyan}1${white}-${cyan}${lastVal}${white})\n${yellow}\t\t  .\n\t\t -|-\n\t\t  |${noColor}\n\t  .-'~~~'-.\n\t.'         '.\n\t|${white}   R.I.P   ${noColor}|\n\t|           |\n\t|           |${green}\n  \\\\${noColor}|           |${green}//`));
 		collector.stop();
 	}
 	else if (message.author.username.toLowerCase() === arrayPlayers[start].toLowerCase())
 	{
-		message.channel.send(codeBlock("ansi", `${white}` + `${arrayPlayers[start]}` + `${green}` + " rolls " + `${cyan}` + `${max}` + " " + `${white}` + "(" + `${cyan}` + "1" + `${white}` + "-" + `${cyan}` + `${lastVal}` + `${white}` + ")" + "\n" + `${yellow}` + `${arrayPlayers[next]}` + "'s" + `${white}` + " turn to roll!"));
+		message.channel.send(codeBlock("ansi", `${white}${arrayPlayers[start]}${green} rolls ${cyan}${max} ${white}(${cyan}1${white}-${cyan}${lastVal}${white})\n${yellow}${arrayPlayers[next]}'s${white} turn to roll!`));
 	}
 	return max;
 }
@@ -63,16 +63,12 @@ function startMessageCollector(message, args, max, start, arrayPlayers)
 				if (start == arrayPlayers.length)
 					start = 0;
 			}
-			else if (arrayPlayers.includes(message.author.username))
-			{
-				message.channel.send(codeBlock("ansi", `${white}` + "Wait for your turn " + `${red}` + message.author.username + `${white}` + ", it is " + `${yellow}` + arrayPlayers[start] + "'s " + `${white}` + "turn!"));
-			}
 		}
 		else if (message.content.toLowerCase() == "stop")
 		{
 			if(arrayPlayers.includes(message.author.username))
 			{
-				message.channel.send(codeBlock("ansi", "Stopping Deathroll"));
+				message.channel.send(codeBlock("ansi", `Stopping Deathrol`));
 				collector.stop();
 			}
 		}
@@ -126,14 +122,14 @@ exports.run = (message, args, client) => {
 	// Exit if started with no players
 	if (users === "" || arrayPlayers.length === 0)
 		return;
-	message.channel.send(codeBlock("ansi", `${blue}` + message.author.username + `${white}` + " started a Deathroll 1-" + `${max}` + `${white}` +"\nPlayers: " + `${green}` + message.author.username + `${white}` + ", " + users + "\n" + `${yellow}` + `${arrayPlayers[start]}` + `${white}` + " starts!"));
+	message.channel.send(codeBlock("ansi", `${blue}${message.author.username}${white} started a Deathroll (${cyan}1${white}-${cyan}${max}${white})\nPlayers: ${green}${message.author.username}${white}, ${users}\n${yellow}${arrayPlayers[start]}${white} starts!`));
 	startMessageCollector(message, args, max, start, arrayPlayers);
 };
 
 exports.help = {
 	name: "deathroll",
 	description: "\u001b[0;37mStarts a game of deathroll. After starting the game typing roll, rolls a value for you",
-	usage: "\u001b[0;32m!deathroll \u001b[0;33m[playerNames] \u001b[0;33m[...] \u001b[0;37m| \u001b[0;32m!deathroll \u001b[0;33m[maxRollValue] \u001b[0;33m[playerNames] \u001b[0;33m[...]\u001b[0m"
+	usage: "\u001b[0;37m!\u001b[0;32mdeathroll \u001b[0;33m[playerNames] \u001b[0;33m[...] \u001b[0;37m| !\u001b[0;32mdeathroll \u001b[0;33m[maxRollValue] \u001b[0;33m[playerNames] \u001b[0;33m[...]"
 };
 
 exports.helpMobile = {

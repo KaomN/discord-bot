@@ -49,9 +49,9 @@ function help(message, args, client, device)
 			var command = client.commands.get(c)
 			// Add to the message for every command
 			if (device.mobile)
-				output += "!" + `${command.helpMobile.name}` + " :: " + `${command.helpMobile.description}` + "\n" + "  " + "usage" +": " + `${command.helpMobile.usage}\n\n`;
+				output += `!${command.helpMobile.name} :: ${command.helpMobile.description}\n  usage: ${command.helpMobile.usage}\n\n`;
 			else
-				output += `${blue}` + "!" + `${command.help.name}` + `${reset}` + " :: " + `${white}` + `${command.help.description}` + "\n" + "  " + `${red}` + "usage" + `${reset}` +": " + `${green}` + `${command.help.usage}\n\n`;
+				output += `${blue}!${command.help.name}${reset} :: ${white}${command.help.description}\n  ${red}usage${reset}: ${green}${command.help.usage}\n\n`;
 		});
 		message.channel.send(codeBlock(content, output));
 	}
@@ -63,9 +63,9 @@ function help(message, args, client, device)
 		{
 			command = client.commands.get(command);
 			if (device.mobile)
-				message.channel.send(codeBlock(content, `= ${command.helpMobile.name} =` + `\n${command.helpMobile.description}\n` + "usage " + ":: " + `${command.helpMobile.usage}\n`));
+				message.channel.send(codeBlock(content, `= ${command.helpMobile.name} =\n${command.helpMobile.description}\nusage :: ${command.helpMobile.usage}\n`));
 			else
-				message.channel.send(codeBlock(content, `${blue}` + `= ${command.help.name} =` + `\n${command.help.description}\n` + `${red}` + "usage " + `${reset}` + ":: " + `${command.help.usage}\n`));
+				message.channel.send(codeBlock(content, `${blue}= ${command.help.name} =\n${command.help.description}\n${red}usage ${reset}:: ${command.help.usage}\n`));
 		}
 		else
 			return message.channel.send(codeBlock(content,"No command with that name"));
@@ -80,7 +80,7 @@ exports.run = (message, args, client) => {
 exports.help = {
 	name: "help",
 	description: "\u001b[0;37mDisplays all commands.",
-	usage: "\u001b[0;32m!help \u001b[0;37m| \u001b[0;32m!help \u001b[0;33m[command]\u001b[0m"
+	usage: "\u001b[0;37m!\u001b[0;32mhelp \u001b[0;37m| !\u001b[0;32mhelp \u001b[0;33m[command]"
 };
 
 exports.helpMobile = {

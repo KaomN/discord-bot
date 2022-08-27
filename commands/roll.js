@@ -105,7 +105,7 @@ function roll(message, args, device)
 				if (num1 != 0 && num[0][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num[0][0] != '+')
 				{
 					val = getRandomInt(num1);
-					message.channel.send(codeBlock(content,`${white}` + message.author.username + `${green}` + " rolls " + `${calcColors(1, num1, val, device)}` + val + " " + `${white}` + "(" + `${cyan}` + "1" + `${white}` + "-" + `${cyan}` + num1 + `${white}` +")"));
+					message.channel.send(codeBlock(content, `${white}${message.author.username }${green} rolls ${calcColors(1, num1, val, device)}${val} ${white}(${cyan}1${white}-${cyan}${num1}${white})`));
 				}
 			}
 		}
@@ -121,7 +121,7 @@ function roll(message, args, device)
 				if (num2 >= num1 && num[0][0] != '0' && num[1][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num2 <= Number.MAX_SAFE_INTEGER)
 				{
 					val = getRandomIntBetween(num1, num2);
-					message.channel.send(codeBlock(content,`${white}` + message.author.username + `${green}` + " rolls " + `${calcColors(num1, num2, val, device)}` + val + `${white}` + " (" + `${cyan}` + num1 + `${white}` + "-" + `${cyan}` + num2 + `${white}` + ")"));
+					message.channel.send(codeBlock(content, `${white}${message.author.username}${green} rolls ${calcColors(num1, num2, val, device)}${val} ${white}(${cyan}${num1}${white}-${cyan}${num2}${white})`));
 				}
 			}
 		}
@@ -131,9 +131,9 @@ function roll(message, args, device)
 	{
 		val = getRandomInt100();
 		if (val === 100)
-			message.channel.send(codeBlock(content,`${white}` + message.author.username + `${green}` + " rolls " + `${yellow}` + "✵" + `${green}` + "100" + `${yellow}` + "✵" + `${white}` + " (" + `${cyan}` + "1" + `${white}` + "-" +  `${cyan}` + "100" + `${white}` +")"));
+			message.channel.send(codeBlock(content,`${white}${message.author.username}${green} rolls ${yellow}✵${green}100${yellow}✵ ${white}(${cyan}1${white}-${cyan}100${white})`));
 		else
-			message.channel.send(codeBlock(content,`${white}` + message.author.username + `${green}` + " rolls " + `${calcColors(1, 100, val, device)}` + val + `${white}` + " (" + `${cyan}` + "1" + `${white}` + "-" + `${cyan}` + "100" + `${white}` +")"));
+			message.channel.send(codeBlock(content,`${white}${message.author.username}${green} rolls ${calcColors(1, 100, val, device)}${val} ${white}(${cyan}1${white}-${cyan}100${white})`));
 	}
 }
 
@@ -146,7 +146,7 @@ exports.run = (message, args) => {
 exports.help = {
 	name: "roll",
 	description: "\u001b[0;37mReturns a random value between 1-100 min and max inclusive.",
-	usage: "\u001b[0;32m!roll \u001b[0;37m| \u001b[0;32m!roll \u001b[0;33m[max] \u001b[0;37m| \u001b[0;32m!roll \u001b[0;33m[min-max]"
+	usage: "\u001b[0;37m!\u001b[0;32mroll \u001b[0;37m| !\u001b[0;32mroll \u001b[0;33m[max] \u001b[0;37m| !\u001b[0;32mroll \u001b[0;33m[min-max]"
 };
 
 exports.helpMobile = {
