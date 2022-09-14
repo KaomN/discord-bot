@@ -3,11 +3,6 @@
 	1st argument is activity type or status, 2nd argument is the type, 3rd and above is the custom string added to the end of the activity.
 	!set [activity/status] [playing/listening/watching/custom] [string].
 */
-
-const devices = require("../modules/device.js");
-const { codeBlock } = require("@discordjs/builders");
-
-// When the command is called
 exports.run = (message, args, client) => {
 	var name = args.slice(2).join(" ");
 	if (args[0].toLowerCase() == "status")

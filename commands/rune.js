@@ -142,7 +142,7 @@ function rune(message, args, device)
 
 // When the command is called
 exports.run = (message, args) => {
-	device = devices.getDevices(message);
+	const device = devices.getDevices(message);
 	rune(message, args, device)
 }
 

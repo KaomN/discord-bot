@@ -9,10 +9,8 @@ module.exports = (client, message) => {
 	const command = args.shift().toLowerCase();
 	// Grab the command data from the client.commands Enmap
 	const cmd = client.commands.get(command);
-	// If command doesn't exist, exit and do nothing
 	if (!cmd)
 		return;
-	// Run the command
 	try {
 		cmd.run(message, args, client);
 	} catch (error) {
