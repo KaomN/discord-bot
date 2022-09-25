@@ -6,6 +6,7 @@
 const crypto = require("crypto");
 const devices = require("../modules/device.js");
 const { codeBlock } = require("@discordjs/builders");
+
 function getRandomIntBetween(min, max) {
 	return crypto.randomInt(min, max + 1)
 	//return Math.floor(Math.random() * (max - min + 1) + min);
@@ -13,10 +14,12 @@ function getRandomIntBetween(min, max) {
 // Returns a random value between 1 and input max(inclusive).
 function getRandomInt(max) {
 	return crypto.randomInt(1, max + 1)
+	//return Math.floor(Math.random() * (max)) + 1;
 }
 // Returns a random value between 1 and 100.
 function getRandomInt100() {
 	return crypto.randomInt(1, 101);
+	//return Math.floor(Math.random() * (100)) + 1;
 }
 // Check if value is a number
 function isNum(val){

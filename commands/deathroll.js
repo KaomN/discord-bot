@@ -1,7 +1,6 @@
 const { MessageCollector } = require("discord.js");
 const crypto = require("crypto");
 const { codeBlock } = require("@discordjs/builders");
-const fs = require('fs');
 
 var green = "\u001b[0;32m";
 var cyan = "\u001b[0;36m";
@@ -11,14 +10,18 @@ var blue = "\u001b[0;34m";
 var red = "\u001b[0;31m";
 var noColor = "\u001b[0m";
 
+var turn = {next: 0, start:0, max: 0};
+
 // Returns a random value between 1 and input max(inclusive).
 function getRandomInt(max) {
 	return crypto.randomInt(1, max + 1);
+	//return Math.floor(Math.random() * (max)) + 1;
 }
 
 // Used for randomizing starting player
 function getRandomstart(max) {
 	return crypto.randomInt(0, max);
+	//return Math.floor(Math.random() * max);
 }
 
 // Capitalize first character in a string
@@ -29,46 +32,56 @@ function capitalizeWords(arr)
 	});
 }
 
-function roll(message, args, max, start, arrayPlayers, collector)
+function roll(message, args, turn, arrayPlayers, collector, randomMode)
 {
-	var lastVal = max;
-	max = getRandomInt(parseInt(max));
+	var lastVal = turn.max;
+	turn.max = getRandomInt(parseInt(turn.max));
 	// Gets next player
-	var next = start + 1
-	if (start + 1 == args.length)
-		next = 0;
-	if (max === 1)
+	if (randomMode === 1)
+		turn.next = getRandomstart(args.length);
+	else
 	{
-		message.channel.send(codeBlock("ansi", `${white}${arrayPlayers[start]}${green} rolls ${cyan}${max} ${white}(${cyan}1${white}-${cyan}${lastVal}${white})\n${yellow}\t\t  .\n\t\t -|-\n\t\t  |${noColor}\n\t  .-'~~~'-.\n\t.'         '.\n\t|${white}   R.I.P   ${noColor}|\n\t|           |\n\t|           |${green}\n  \\\\${noColor}|           |${green}//`));
+		turn.next = turn.start + 1
+		if (turn.start + 1 == args.length)
+		turn.next = 0;
+	}
+	if (turn.max === 1)
+	{
+		message.channel.send(codeBlock("ansi", `${white}${arrayPlayers[turn.start]}${green} rolls ${cyan}${turn.max} ${white}(${cyan}1${white}-${cyan}${lastVal}${white})\n${yellow}\t\t  .\n\t\t -|-\n\t\t  |${noColor}\n\t  .-'~~~'-.\n\t.'         '.\n\t|${white}   R.I.P   ${noColor}|\n\t|           |\n\t|           |${green}\n  \\\\${noColor}|           |${green}//`));
 		collector.stop();
 	}
-	else if (message.author.username.toLowerCase() === arrayPlayers[start].toLowerCase())
+	else if (message.author.username.toLowerCase() === arrayPlayers[turn.start].toLowerCase())
 	{
-		message.channel.send(codeBlock("ansi", `${white}${arrayPlayers[start]}${green} rolls ${cyan}${max} ${white}(${cyan}1${white}-${cyan}${lastVal}${white})\n${yellow}${arrayPlayers[next]}'s${white} turn to roll!`));
+		message.channel.send(codeBlock("ansi", `${white}${arrayPlayers[turn.start]}${green} rolls ${cyan}${turn.max} ${white}(${cyan}1${white}-${cyan}${lastVal}${white})\n${yellow}${arrayPlayers[turn.next]}'s${white} turn to roll!`));
 	}
-	return max;
+	return turn;
 }
 
-function startMessageCollector(message, args, max, start, arrayPlayers)
+function startMessageCollector(message, args, turn, arrayPlayers, randomMode)
 {
 	const collector = new MessageCollector(message.channel);
 	collector.on('collect', message =>
 	{
 		if (message.content.toLowerCase() == "roll")
 		{
-			if (message.author.username.toLowerCase() === arrayPlayers[start].toLowerCase())
+			if (message.author.username.toLowerCase() === arrayPlayers[turn.start].toLowerCase())
 			{	
-				max = roll(message, args, max, start, arrayPlayers, collector);
-				start++;
-				if (start == arrayPlayers.length)
-					start = 0;
+				turn = roll(message, args, turn, arrayPlayers, collector, randomMode);
+				if (randomMode === 1)
+					turn.start = turn.next;
+				else
+				{
+					turn.start++;
+					if (turn.start == arrayPlayers.length)
+					turn.start = 0;
+				}
 			}
 		}
 		else if (message.content.toLowerCase() == "stop")
 		{
 			if(arrayPlayers.includes(message.author.username))
 			{
-				message.channel.send(codeBlock("ansi", `Stopping Deathrol`));
+				message.channel.send(codeBlock("ansi", `Stopping Deathroll`));
 				collector.stop();
 			}
 		}
@@ -77,12 +90,19 @@ function startMessageCollector(message, args, max, start, arrayPlayers)
 
 exports.run = (message, args, client) => {
 	// default value for max if there is no argument for max value.
-	var max = 10000;
+	turn.max = 10000;
 	var users = "";
 	var arrayPlayers = [];
+	var randomMode = 0;
 	// Capitalize first letter of the players.
 	args = capitalizeWords(args);
 	// check if there is any numbers for first argument or if it starts with players directly
+	var index = args.indexOf("-r");
+	if (index > -1)
+	{
+		randomMode = 1;
+		args.splice(index, 1);
+	}
 	if (isNaN(parseInt(args[0])))
 	{
 		// copy players to new player array
@@ -106,7 +126,7 @@ exports.run = (message, args, client) => {
 		}, args);
 		// shifts first argument
 		arrayPlayers.shift();
-		max = args.shift();
+		turn.max = args.shift();
 		// Adding colors to playernames
 		args.forEach(function(part, index)
 		{
@@ -118,12 +138,15 @@ exports.run = (message, args, client) => {
 	arrayPlayers.unshift(message.author.username);
 	args.unshift(message.author.username);
 	// Randomize who starts
-	var start = getRandomstart(args.length);
+	turn.start = getRandomstart(args.length);
 	// Exit if started with no players
 	if (users === "" || arrayPlayers.length === 0)
 		return;
-	message.channel.send(codeBlock("ansi", `${blue}${message.author.username}${white} started a Deathroll (${cyan}1${white}-${cyan}${max}${white})\nPlayers: ${green}${message.author.username}${white}, ${users}\n${yellow}${arrayPlayers[start]}${white} starts!`));
-	startMessageCollector(message, args, max, start, arrayPlayers);
+	if (randomMode === 1)
+		message.channel.send(codeBlock("ansi", `${blue}${message.author.username}${white} started a Deathroll random mode (${cyan}1${white}-${cyan}${turn.max}${white})\nPlayers: ${green}${message.author.username}${white}, ${users}\n${yellow}${arrayPlayers[turn.start]}${white} starts!`));
+	else
+		message.channel.send(codeBlock("ansi", `${blue}${message.author.username}${white} started a Deathroll (${cyan}1${white}-${cyan}${turn.max}${white})\nPlayers: ${green}${message.author.username}${white}, ${users}\n${yellow}${arrayPlayers[turn.start]}${white} starts!`));
+	startMessageCollector(message, args, turn, arrayPlayers, randomMode);
 };
 
 exports.help = {
