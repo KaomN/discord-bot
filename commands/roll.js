@@ -30,8 +30,7 @@ function isInt(val) {
 	return val % 1 === 0;
 }
 // Calculate colors for the roll
-function calcColors(min, max, val, device)
-{
+function calcColors(min, max, val, device) {
 	if (device.mobile)
 	{
 		return ("");
@@ -67,8 +66,7 @@ function calcColors(min, max, val, device)
 	}
 }
 // Main function
-function roll(message, args, device)
-{
+function roll(message, args, device) {
 	if (device.mobile)
 	{
 		var green = "";

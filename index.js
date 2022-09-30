@@ -12,8 +12,7 @@ const client = new Client({
 	]
 });
 
-function init()
-{
+function init() {
 	// Create new collection to store the commands
 	client.commands = new Collection();
 	// Bind events
@@ -43,7 +42,6 @@ function init()
 			status: 'online'
 		});
 	});
-
 	client.login(process.env.TOKEN);
 }
 

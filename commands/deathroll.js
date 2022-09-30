@@ -32,8 +32,7 @@ function capitalizeWords(arr)
 	});
 }
 
-function roll(message, args, turn, arrayPlayers, collector, randomMode)
-{
+function roll(message, args, turn, arrayPlayers, collector, randomMode) {
 	var lastVal = turn.max;
 	turn.max = getRandomInt(parseInt(turn.max));
 	// Gets next player
@@ -57,8 +56,7 @@ function roll(message, args, turn, arrayPlayers, collector, randomMode)
 	return turn;
 }
 
-function startMessageCollector(message, args, turn, arrayPlayers, randomMode)
-{
+function startMessageCollector(message, args, turn, arrayPlayers, randomMode) {
 	const collector = new MessageCollector(message.channel);
 	collector.on('collect', message =>
 	{
@@ -88,7 +86,7 @@ function startMessageCollector(message, args, turn, arrayPlayers, randomMode)
 	})
 }
 
-exports.run = (message, args, client) => {
+exports.run = (message, args) => {
 	// default value for max if there is no argument for max value.
 	turn.max = 10000;
 	var users = "";

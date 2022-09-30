@@ -31,8 +31,7 @@ function getGemQuality(index) {
 		return "Flawless";
 }
 // Get gem color
-function getGemColor(gemIndex, device)
-{
+function getGemColor(gemIndex, device) {
 	if (device.mobile)
 	{
 		return ("");
@@ -58,8 +57,7 @@ function getGemColor(gemIndex, device)
 	}
 }
 // Main function
-function rune(message, args, device)
-{
+function rune(message, args, device) {
 	// Initiate variables according to device type
 	if (device.mobile)
 	{

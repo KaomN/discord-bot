@@ -5,8 +5,7 @@
 const { codeBlock } = require("@discordjs/builders");
 const devices = require("../modules/device.js");
 // Main function
-function help(message, args, client, device)
-{
+function help(message, args, client, device) {
 	// Initiate variables according to device type
 	if (device.mobile)
 	{
