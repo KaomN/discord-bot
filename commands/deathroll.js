@@ -1,6 +1,7 @@
 /*
 	!deathroll Starts a game of deathroll. After starting the game typing roll, rolls a value for you.
 	-r argument chooses rolling players randomly
+	-a argument automates the rolling
 */
 const { MessageCollector } = require("discord.js");
 const crypto = require("crypto");
