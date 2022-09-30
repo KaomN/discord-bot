@@ -122,32 +122,29 @@ function checkArgs(arg, arguments) {
 }
 
 async function rolling(arguments, message, args, turn, arrayPlayers, arguments) {
-	console.log(arguments.auto )
-	await timer(1200);
+	if (arguments.auto === true)
+		await timer(1250);
 	if (arguments.auto === true)
 	{
-			while (turn.max != 1)
+		while (turn.max != 1)
+		{
+			turn.max = autoroll(message, args, turn, arrayPlayers, arguments);
+			if (arguments.random === true)
+				turn.start = turn.next;
+			else
 			{
-				turn.max = autoroll(message, args, turn, arrayPlayers, arguments);
-				if (arguments.random === true)
-					turn.start = turn.next;
-				else
-				{
-					turn.start++;
-					if (turn.start == arrayPlayers.length)
-					turn.start = 0;
-				}
-				await timer(1200);
+				turn.start++;
+				if (turn.start == arrayPlayers.length)
+				turn.start = 0;
 			}
+			await timer(1250);
 		}
-	else
-	{
-		startMessageCollector(message, args, turn, arrayPlayers, arguments);
-		await timer(100);
 	}
+	else
+		startMessageCollector(message, args, turn, arrayPlayers, arguments);
 }
 
-exports.run = async (message, args) => {
+exports.run = (message, args) => {
 	// default value for max if there is no argument for max value.
 	var users = "";
 	var arrayPlayers = [];
