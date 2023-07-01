@@ -20,7 +20,7 @@ const GLOBAL_TIER_LIST = [
 	"Raethwind Wilds",
 	"Serpent's Lair",
 	"Ancient's Lament",
-	"Crusaders' Catherdral",
+	"Crusaders' Cathedral",
 	"Dark Ravine",
 	"The Onyx Hold",
 	"Shivta Ruins",
@@ -34,7 +34,7 @@ const GLOBAL_TIER_LIST = [
 	"Zenith",
 	"Ferals' Den",
 	"Guulrahn Slums",
-	"Shadow Plunge",
+	"Shadowed Plunge",
 	"Conclave",
 	"Black Asylum"
 ]
@@ -76,7 +76,7 @@ exports.run = (message, args) => {
 			for (var i = 0; i < result.total; i++) {
 				found_index = GLOBAL_TIER_LIST.indexOf(result[i].target);
 				if (found_index < 5)
-					output += cyan + (found_index + 1) + ": " + GLOBAL_TIER_LIST[found_index] + "\n";
+					output += blue + (found_index + 1) + ": " + GLOBAL_TIER_LIST[found_index] + "\n";
 				else if (found_index > 4 && found_index < 19)
 					output += green + (found_index + 1) + ": " + GLOBAL_TIER_LIST[found_index] + "\n";
 				else if (found_index > 18 && found_index < 26)
