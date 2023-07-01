@@ -6,7 +6,6 @@
 const { codeBlock } = require("@discordjs/builders");
 const fuzzysort = require("fuzzysort");
 
-
 const GLOBAL_TIER_LIST = [
 	"Blind Burrows",
 	"Champion's Demise",
@@ -40,39 +39,6 @@ const GLOBAL_TIER_LIST = [
 	"Black Asylum"
 ]
 
-const GLOBAL_TIER_LIST_SEARCH = [
-	"blind burrows",
-	"champions demise",
-	"earthen wound",
-	"renegades retreat",
-	"sunken ruins",
-	"aldurwood",
-	"guulrahn canals",
-	"kor dragan baracks",
-	"maugans works",
-	"maulwood",
-	"raethwind wilds",
-	"serpents lair",
-	"ancients lament",
-	"crusaders' catherdral",
-	"dark ravine",
-	"the onyx hold",
-	"shivta ruins",
-	"witchwater",
-	"abondoned mineworks",
-	"cultist refuge",
-	"demons wake",
-	"lost archives",
-	"prison of caldeum",
-	"whispering pines",
-	"zenith",
-	"ferals den",
-	"guulrahn slums",
-	"shadow plunge",
-	"conclave",
-	"black asylum"
-]
-
 exports.run = (message, args) => {
 	var output = ""
 	var green = "\u001b[0;32m";
@@ -82,10 +48,13 @@ exports.run = (message, args) => {
 	var red = "\u001b[0;31m";
 	var blue = "\u001b[0;34m";
 	var content = "ansi";
-	if (args[0].toLowerCase() === "list") {
+	var search_word = args[0];
+	if (!search_word)
+		return;
+	if (search_word.toLowerCase() === "list") {
 		for (var i = 0; i < GLOBAL_TIER_LIST.length; i++) {
 			if (i < 5)
-				output += cyan + (i + 1) + ": " + GLOBAL_TIER_LIST[i] + "\n";
+				output += blue + (i + 1) + ": " + GLOBAL_TIER_LIST[i] + "\n";
 			else if (i > 4 && i < 19)
 				output += green + (i + 1) + ": " + GLOBAL_TIER_LIST[i] + "\n";
 			else if (i > 18 && i < 26)
@@ -97,9 +66,10 @@ exports.run = (message, args) => {
 		return;
 	}
 	else if (args[0] != undefined) {
-		var search_word = args[0]
-		//var index = GLOBAL_TIER_LIST_SEARCH.indexOf(search_word);
-		result = fuzzysort.go(search_word, GLOBAL_TIER_LIST, {});
+		for (var i = 1; i < args.length; i++) {
+			search_word += " " + args[i];
+		}
+		result = fuzzysort.go(search_word, GLOBAL_TIER_LIST);
 		var output = ""
 		var found_index = null
 		if (result.total != 0){
@@ -118,7 +88,7 @@ exports.run = (message, args) => {
 			return;
 		}
 		else if (result.total == 0){
-			message.channel.send(codeBlock(content, `Could not find any results for: ${cyan}${args[0]}\nTry using a different search term or use !tier list to see all available NM Dungeon tiers.`));
+			message.channel.send(codeBlock(content, `${white}Could not find any results for: ${cyan}${search_word}\n${white}Try using a different search term or use !tier list to see all available NM Dungeon tiers.`));
 			return;
 		}
 	}
@@ -126,7 +96,7 @@ exports.run = (message, args) => {
 
 exports.help = {
 	name: "tier",
-	description: "\u001b[0;37mGet NM Dungeon tier list..",
+	description: "\u001b[0;37mGet Nightmare Dungeon tier list.",
 	usage: "\u001b[0;37m!\u001b[0;32mtier \u001b[0;33m[dungeon_name/list]"
 };
 
