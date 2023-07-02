@@ -25,7 +25,7 @@ const GLOBAL_TIER_LIST = [
 	"The Onyx Hold",
 	"Shivta Ruins",
 	"Witchwater",
-	"Abondoned Mineworks",
+	"Abandoned Mineworks",
 	"Cultist Refuge",
 	"Demon's Wake",
 	"Lost Archives",
