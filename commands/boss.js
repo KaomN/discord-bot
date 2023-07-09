@@ -32,6 +32,6 @@ exports.help = {
 
 exports.helpMobile = {
 	name: "boss",
-	description: "Shows next World boss spawn time..",
+	description: "Shows next World boss spawn time.",
 	usage: "!boss"
 };
