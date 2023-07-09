@@ -5,6 +5,7 @@
 */
 const { codeBlock } = require("@discordjs/builders");
 const fuzzysort = require("fuzzysort");
+const { green, cyan, white, yellow, red, blue } = require("../helpers/colors.js");
 
 const GLOBAL_TIER_LIST = [
 	"Blind Burrows",
@@ -41,17 +42,9 @@ const GLOBAL_TIER_LIST = [
 
 exports.run = (message, args) => {
 	var output = ""
-	var green = "\u001b[0;32m";
-	var cyan = "\u001b[0;36m";
-	var white = "\u001b[0;37m";
-	var yellow = "\u001b[0;33m";
-	var red = "\u001b[0;31m";
-	var blue = "\u001b[0;34m";
 	var content = "ansi";
 	var search_word = args[0];
-	if (!search_word)
-		return;
-	if (search_word.toLowerCase() === "list") {
+	if (!search_word){
 		for (var i = 0; i < GLOBAL_TIER_LIST.length; i++) {
 			if (i < 5)
 				output += blue + (i + 1) + ": " + GLOBAL_TIER_LIST[i] + "\n";
