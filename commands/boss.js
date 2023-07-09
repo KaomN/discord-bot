@@ -18,9 +18,7 @@ exports.run = async (message, args) => {
 	seconds = Math.floor(((data.boss.expected - current) - (hours*3600) - (minutes*60)))
 
 	output += `${blue}Next World Boss Spawn: ${yellow}${hours}h ${minutes}m ${seconds}s\n`
-	output += `${blue}Boss: ${yellow}${data.boss.name}\n`
-	output += `${blue}Zone: ${yellow}${data.boss.zone}\n`
-	output += `${blue}Location: ${yellow}${data.boss.territory}\n`
+	output += `${blue}Boss: ${yellow}${data.boss.expectedName}\n`
 
 	message.channel.send(codeBlock(content, output));
 	return;
