@@ -1,3 +1,4 @@
 .env
 *.toml
 node_modules
+commands/base.js
