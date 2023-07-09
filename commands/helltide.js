@@ -1,5 +1,5 @@
 /*
-	Shows Diablo 4 World boss next spawn time.
+	Shows Diablo 4 Helltide spawn timer.
 	!boss.
 */
 const { codeBlock } = require("@discordjs/builders");
@@ -44,13 +44,13 @@ exports.run = async (message, args) => {
 }
 
 exports.help = {
-	name: "boss",
-	description: "\u001b[0;37mShows next World boss spawn time.",
-	usage: "\u001b[0;37m!\u001b[0;32mboss"
+	name: "helltide",
+	description: "\u001b[0;37mShows Helltide spawn timer.",
+	usage: "\u001b[0;37m!\u001b[0;32mhelltide"
 };
 
 exports.helpMobile = {
-	name: "boss",
-	description: "Shows next World boss spawn time..",
-	usage: "!boss"
+	name: "helltide",
+	description: "Shows Helltide spawn timer.",
+	usage: "!helltide"
 };

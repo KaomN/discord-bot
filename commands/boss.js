@@ -43,6 +43,7 @@ exports.run = async (message, args) => {
 
 	output = calculateTime(current, data.boss.expected, data)
 
+
 	message.channel.send(codeBlock(content, output));
 	return;
 }
@@ -55,6 +56,6 @@ exports.help = {
 
 exports.helpMobile = {
 	name: "boss",
-	description: "Shows next World boss spawn time..",
+	description: "Shows next World boss spawn time.",
 	usage: "!boss"
 };
