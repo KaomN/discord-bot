@@ -6,15 +6,8 @@
 const { MessageCollector } = require("discord.js");
 const crypto = require("crypto");
 const { codeBlock } = require("@discordjs/builders");
+const { green, cyan, white, yellow, blue, noColor } = require("../helpers/colors.js");
 const timer = ms => new Promise(res => setTimeout(res, ms))
-
-var green = "\u001b[0;32m";
-var cyan = "\u001b[0;36m";
-var white = "\u001b[0;37m";
-var yellow = "\u001b[0;33m";
-var blue = "\u001b[0;34m";
-var red = "\u001b[0;31m";
-var noColor = "\u001b[0m";
 
 // Returns a random value between 1 and input max(inclusive).
 function getRandomInt(max) {
