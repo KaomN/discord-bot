@@ -48,9 +48,3 @@ exports.help = {
 	description: "\u001b[0;37mShows Helltide spawn timer.",
 	usage: "\u001b[0;37m!\u001b[0;32mhelltide"
 };
-
-exports.helpMobile = {
-	name: "helltide",
-	description: "Shows Helltide spawn timer.",
-	usage: "!helltide"
-};

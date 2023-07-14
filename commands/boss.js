@@ -53,9 +53,3 @@ exports.help = {
 	description: "\u001b[0;37mShows next World boss spawn time.",
 	usage: "\u001b[0;37m!\u001b[0;32mboss"
 };
-
-exports.helpMobile = {
-	name: "boss",
-	description: "Shows next World boss spawn time.",
-	usage: "!boss"
-};
