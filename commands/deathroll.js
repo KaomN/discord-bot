@@ -208,9 +208,3 @@ exports.help = {
 	description: "\u001b[0;37mStarts a game of deathroll. After starting the game typing roll, rolls a value for you. -r argument chooses random rolling players",
 	usage: "\u001b[0;37m!\u001b[0;32mdeathroll \u001b[0;33m[playerNames] \u001b[0;33m[...] \u001b[0;37m| \u001b[0;37m!\u001b[0;32mdeathroll \u001b[0;33m[args] \u001b[0;33m[playerNames] \u001b[0;33m[...] \u001b[0;37m| !\u001b[0;32mdeathroll \u001b[0;33m[maxRollValue] \u001b[0;33m[playerNames] \u001b[0;33m[...] \u001b[0;37m| !\u001b[0;32mdeathroll \u001b[0;33m[args] \u001b[0;33m[maxRollValue] \u001b[0;33m[playerNames] \u001b[0;33m[...]"
 };
-
-exports.helpMobile = {
-	name: "deathroll",
-	description: "Starts a game of deathroll. After starting the game typing roll, rolls a value for you. -r argument chooses random rolling players",
-	usage: "!deathroll [playerNames] [...] | !deathroll [args] [playerNames] [...] | !deathroll [maxRollValue] [playerNames] [...] | !deathroll [maxRollValue] [args] [playerNames] [...]"
-};

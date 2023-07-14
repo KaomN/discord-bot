@@ -44,7 +44,7 @@ exports.run = (message, args) => {
 	var output = ""
 	var content = "ansi";
 	var search_word = args[0];
-	if (!search_word){
+	if (!search_word || search_word == "list"){
 		for (var i = 0; i < GLOBAL_TIER_LIST.length; i++) {
 			if (i < 5)
 				output += blue + (i + 1) + ": " + GLOBAL_TIER_LIST[i] + "\n";
@@ -58,7 +58,7 @@ exports.run = (message, args) => {
 		message.channel.send(codeBlock(content, output));
 		return;
 	}
-	else if (args[0] != undefined) {
+	else if (args[0] != null) {
 		for (var i = 1; i < args.length; i++) {
 			search_word += " " + args[i];
 		}
@@ -80,8 +80,8 @@ exports.run = (message, args) => {
 			message.channel.send(codeBlock(content, output));
 			return;
 		}
-		else if (result.total == 0){
-			message.channel.send(codeBlock(content, `${white}Could not find any results for: ${cyan}${search_word}\n${white}Try using a different search term or use !tier list to see all available NM Dungeon tiers.`));
+		else if (result.total == 0) {
+			message.channel.send(codeBlock(content, `${white}Could not find any results for: ${cyan}${search_word}\n${white}Try using a different search term or use !tier to see a list of available NM Dungeon tiers.`));
 			return;
 		}
 	}
@@ -91,10 +91,4 @@ exports.help = {
 	name: "tier",
 	description: "\u001b[0;37mGet Nightmare Dungeon tier list.",
 	usage: "\u001b[0;37m!\u001b[0;32mtier \u001b[0;33m[dungeon_name/list]"
-};
-
-exports.helpMobile = {
-	name: "tier",
-	description: "Get NM Dungeon tier list.",
-	usage: "!tier [dungeon_name/list]"
 };
