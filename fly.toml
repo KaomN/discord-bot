@@ -1,0 +1,4 @@
+app = "kaom-discord-bot"
+primary_region = "arn"
+
+[env]
