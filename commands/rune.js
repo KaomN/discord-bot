@@ -2,11 +2,13 @@
 	!rune [arg] sends a message on what gem is needed to upgrade to the next rune
 */
 const { codeBlock } = require("@discordjs/builders");
+const { white, yellow, noColor } = require("../helpers/colors.js");
 const runes = [	"El", "Eld", "Tir", "Nef", "Eth", "Ith", "Tal", "Ral", "Ort",
 				"Thul", "Amn", "Sol", "Shael", "Dol", "Hel", "Io", "Lum", "Ko",
 				"Fal", "Lem", "Pul", "Um", "Mal", "Ist", "Gul", "Vex", "Ohm",
 				"Lo", "Sur", "Ber", "Jah", "Cham", "Zod"];
 const gems = ["Topaz", "Amethyst", "Sapphire", "Ruby", "Emerald", "Diamond"];
+
 // Get the gem in array
 function getGem(index) {
 	if (index >= 9 && index <= 14)
@@ -46,9 +48,6 @@ function getGemColor(gemIndex) {
 }
 // Main function
 function rune(message, args) {
-	var white = "\u001b[0;37m";
-	var yellow = "\u001b[0;33m";
-	var reset = "\u001b[0m";
 	var content = "ansi";
 	if (args[0] == null || args[0] === "list") {
 		var list = "\u001b[0;33m";
@@ -86,16 +85,16 @@ function rune(message, args) {
 		// index 9 and above needs gems
 		if (index >= 0 && index <= 19) {
 			if (index < 9)
-				message.channel.send(codeBlock(content,`${white}3 ${yellow}${runes[index]}${reset} → ${white}1 ${yellow}${runes[index + 1]}`));
+				message.channel.send(codeBlock(content,`${white}3 ${yellow}${runes[index]}${noColor} → ${white}1 ${yellow}${runes[index + 1]}`));
 			else
-				message.channel.send(codeBlock(content,`${white}3 ${yellow}${runes[index]} ${reset}${getGemQuality(index)} ${getGemColor(gemIndex)}${gems[gemIndex]}${reset} → ${white}1 ${yellow}${runes[index + 1]}`));
+				message.channel.send(codeBlock(content,`${white}3 ${yellow}${runes[index]} ${noColor}${getGemQuality(index)} ${getGemColor(gemIndex)}${gems[gemIndex]}${noColor} → ${white}1 ${yellow}${runes[index + 1]}`));
 		}
 		else if (index > 19 && index < 32) {
 			// runes # 21-26 does not have a gem quality
 			if (getGemQuality(index) == "")
-				message.channel.send(codeBlock(content,`${white}2 ${yellow}${runes[index]} ${getGemColor(gemIndex)}${gems[gemIndex]}${reset} → ${white}1 ${yellow}${runes[index + 1]}`));
+				message.channel.send(codeBlock(content,`${white}2 ${yellow}${runes[index]} ${getGemColor(gemIndex)}${gems[gemIndex]}${noColor} → ${white}1 ${yellow}${runes[index + 1]}`));
 			else
-				message.channel.send(codeBlock(content,`${white}2 ${yellow}${runes[index]} ${reset}${getGemQuality(index)} ${getGemColor(gemIndex)}${gems[gemIndex]}${reset} → ${white}1 ${yellow}${runes[index + 1]}`));
+				message.channel.send(codeBlock(content,`${white}2 ${yellow}${runes[index]} ${noColor}${getGemQuality(index)} ${getGemColor(gemIndex)}${gems[gemIndex]}${noColor} → ${white}1 ${yellow}${runes[index + 1]}`));
 		}
 		else
 			return;

@@ -3,7 +3,7 @@
 	!boss.
 */
 const { codeBlock } = require("@discordjs/builders");
-const { getEvents } = require("../helpers/axios.js");
+const { getEvents } = require("../helpers/d4event.js");
 const { yellow, blue } = require("../helpers/colors.js");
 
 function calculateTime(current, expected, data) {
@@ -36,16 +36,20 @@ function calculateTime(current, expected, data) {
 
 exports.run = async (message, args) => {
 	var content = "ansi";
-
-	data = await getEvents()
-	var current = new Date()
-	current = current.getTime()/1000
-
-	output = calculateTime(current, data.boss.expected, data)
-
-
-	message.channel.send(codeBlock(content, output));
-	return;
+	try {
+		var data = await getEvents()
+		if (data == false || data == undefined) {
+			message.channel.send(codeBlock(content, "Error: D4Armory API is not responding."));
+		}
+		else {
+			var current = new Date()
+			current = current.getTime()/1000
+			output = calculateTime(current, data.boss.expected, data)
+			message.channel.send(codeBlock(content, output));
+		}
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 exports.help = {
