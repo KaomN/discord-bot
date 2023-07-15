@@ -8,6 +8,7 @@ const crypto = require("crypto");
 const { codeBlock } = require("@discordjs/builders");
 const { green, cyan, white, yellow, blue, noColor } = require("../helpers/colors.js");
 const timer = ms => new Promise(res => setTimeout(res, ms))
+const modules = require("../modules/modules.js")
 
 // Returns a random value between 1 and input max(inclusive).
 function getRandomInt(max) {
@@ -65,7 +66,7 @@ function roll(message, args, turn, arrayPlayers, collector, arguments) {
 		message.channel.send(codeBlock("ansi", `${white}${arrayPlayers[turn.start]}${green} rolls ${cyan}${turn.max} ${white}(${cyan}1${white}-${cyan}${lastVal}${white})\n${yellow}\t\t  .\n\t\t -|-\n\t\t  |${noColor}\n\t  .-'~~~'-.\n\t.'         '.\n\t|${white}   R.I.P   ${noColor}|\n\t|           |\n\t|           |${green}\n  \\\\${noColor}|           |${green}//`));
 		collector.stop();
 	}
-	else if (message.author.username.toLowerCase() === arrayPlayers[turn.start].toLowerCase())
+	else if (modules.getNickname(message).toLowerCase() === arrayPlayers[turn.start].toLowerCase())
 	{
 		message.channel.send(codeBlock("ansi", `${white}${arrayPlayers[turn.start]}${green} rolls ${cyan}${turn.max} ${white}(${cyan}1${white}-${cyan}${lastVal}${white})\n${yellow}${arrayPlayers[turn.next]}'s${white} turn to roll!`));
 	}
@@ -78,7 +79,7 @@ function startMessageCollector(message, args, turn, arrayPlayers, arguments) {
 	{
 		if (message.content.toLowerCase() == "roll")
 		{
-			if (message.author.username.toLowerCase() === arrayPlayers[turn.start].toLowerCase())
+			if (modules.getNickname(message).toLowerCase() === arrayPlayers[turn.start].toLowerCase())
 			{	
 				turn.max = roll(message, args, turn, arrayPlayers, collector, arguments);
 				if (arguments.random === true)
@@ -93,7 +94,7 @@ function startMessageCollector(message, args, turn, arrayPlayers, arguments) {
 		}
 		else if (message.content.toLowerCase() == "stop")
 		{
-			if(arrayPlayers.includes(message.author.username))
+			if(arrayPlayers.includes(modules.getNickname(message)))
 			{
 				message.channel.send(codeBlock("ansi", `Stopping Deathroll`));
 				collector.stop();
@@ -183,8 +184,8 @@ exports.run = (message, args) => {
 		users = args.join(white + ", ");
 	}
 	// Adding command starter to player array
-	arrayPlayers.unshift(message.author.username);
-	args.unshift(message.author.username);
+	arrayPlayers.unshift(modules.getNickname(message));
+	args.unshift(modules.getNickname(message));
 	// Randomize who starts
 	turn.start = getRandomstart(args.length);
 	// Exit if started with no players
@@ -197,9 +198,9 @@ exports.run = (message, args) => {
 	}
 	mode = mode.slice(0, -2);
 	if (mode != "")
-		message.channel.send(codeBlock("ansi", `${blue}${message.author.username}${white} started a Deathroll ${mode} mode (${cyan}1${white}-${cyan}${turn.max}${white})\nPlayers: ${green}${message.author.username}${white}, ${users}\n${yellow}${arrayPlayers[turn.start]}${white} starts!`));
+		message.channel.send(codeBlock("ansi", `${blue}${modules.getNickname(message)}${white} started a Deathroll ${mode} mode (${cyan}1${white}-${cyan}${turn.max}${white})\nPlayers: ${green}${modules.getNickname(message)}${white}, ${users}\n${yellow}${arrayPlayers[turn.start]}${white} starts!`));
 	else
-		message.channel.send(codeBlock("ansi", `${blue}${message.author.username}${white} started a Deathroll (${cyan}1${white}-${cyan}${turn.max}${white})\nPlayers: ${green}${message.author.username}${white}, ${users}\n${yellow}${arrayPlayers[turn.start]}${white} starts!`));
+		message.channel.send(codeBlock("ansi", `${blue}${modules.getNickname(message)}${white} started a Deathroll (${cyan}1${white}-${cyan}${turn.max}${white})\nPlayers: ${green}${modules.getNickname(message)}${white}, ${users}\n${yellow}${arrayPlayers[turn.start]}${white} starts!`));
 	rolling(arguments, message, args, turn, arrayPlayers, arguments);
 };
 

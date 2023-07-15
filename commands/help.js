@@ -3,13 +3,9 @@
 	Accepts 1 argument in format: <commandname>
 */
 const { codeBlock } = require("@discordjs/builders");
+const { green, red, blue, white, noColor } = require("../helpers/colors.js");
 // Main function
 function help(message, args, client) {
-	var green = "\u001b[0;32m";
-	var red = "\u001b[0;31m";
-	var blue = "\u001b[0;34m";
-	var white = "\u001b[0;37m";
-	var reset = "\u001b[0m";
 	var content = "ansi";
 	if (!args[0]) {
 		//Get names of the commands and save them in an array.
@@ -20,7 +16,7 @@ function help(message, args, client) {
 		allCommands.forEach(c => {
 			var command = client.commands.get(c)
 			// Add to the message for every command
-			output += `${blue}!${command.help.name}${reset} :: ${white}${command.help.description}\n  ${red}usage${reset}: ${green}${command.help.usage}\n\n`;
+			output += `${blue}!${command.help.name}${noColor} :: ${white}${command.help.description}\n  ${red}usage${noColor}: ${green}${command.help.usage}\n\n`;
 		});
 		message.channel.send(codeBlock(content, output));
 	}
@@ -29,7 +25,7 @@ function help(message, args, client) {
 		var command = args[0];
 		if (client.commands.has(command)) {
 			command = client.commands.get(command);
-			message.channel.send(codeBlock(content, `${blue}= ${command.help.name} =\n${command.help.description}\n${red}usage ${reset}:: ${command.help.usage}\n`));
+			message.channel.send(codeBlock(content, `${blue}= ${command.help.name} =\n${command.help.description}\n${red}usage ${noColor}:: ${command.help.usage}\n`));
 		}
 		else
 			return message.channel.send(codeBlock(content,"No command with that name"));

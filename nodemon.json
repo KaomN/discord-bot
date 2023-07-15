@@ -1,0 +1,11 @@
+{
+	"watch": [
+	  "commands",
+	  "events",
+	  "helpers",
+	  "modules",
+	  "index.js"
+	],
+	"ext": "js",
+	"delay": "1500"
+}

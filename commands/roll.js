@@ -5,6 +5,8 @@
 */
 const crypto = require("crypto");
 const { codeBlock } = require("@discordjs/builders");
+const modules = require("../modules/modules.js");
+const { green, cyan, white, yellow } = require("../helpers/colors.js");
 
 function getRandomIntBetween(min, max) {
 	return crypto.randomInt(min, max + 1)
@@ -52,10 +54,6 @@ function calcColors(min, max, val) {
 }
 // Main function
 async function roll(message, args) {
-	var green = "\u001b[0;32m";
-	var cyan = "\u001b[0;36m";
-	var white = "\u001b[0;37m";
-	var yellow = "\u001b[0;33m";
 	var content = "ansi";
 	var val;
 	if (args.length === 1) {
@@ -68,7 +66,7 @@ async function roll(message, args) {
 				// Check if valid number
 				if (num1 != 0 && num[0][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num[0][0] != '+') {
 					val = getRandomInt(num1);
-					message.channel.send(codeBlock(content, `${white}${message.author.username }${green} rolls ${calcColors(1, num1, val)}${val} ${white}(${cyan}1${white}-${cyan}${num1}${white})`));
+					message.channel.send(codeBlock(content, `${white}${modules.getNickname(message)}${green} rolls ${calcColors(1, num1, val)}${val} ${white}(${cyan}1${white}-${cyan}${num1}${white})`));
 				}
 			}
 		}
@@ -81,7 +79,7 @@ async function roll(message, args) {
 				// Check if valid numbers
 				if (num2 >= num1 && num[0][0] != '0' && num[1][0] != '0' && num1 <= Number.MAX_SAFE_INTEGER && num2 <= Number.MAX_SAFE_INTEGER) {
 					val = getRandomIntBetween(num1, num2);
-					message.channel.send(codeBlock(content, `${white}${message.author.username}${green} rolls ${calcColors(num1, num2, val)}${val} ${white}(${cyan}${num1}${white}-${cyan}${num2}${white})`));
+					message.channel.send(codeBlock(content, `${white}${modules.getNickname(message)}${green} rolls ${calcColors(num1, num2, val)}${val} ${white}(${cyan}${num1}${white}-${cyan}${num2}${white})`));
 				}
 			}
 		}
@@ -90,14 +88,14 @@ async function roll(message, args) {
 	else if (args.length < 1) {
 		val = getRandomInt100();
 		if (val === 100)
-			message.channel.send(codeBlock(content,`${white}${message.author.username}${green} rolls ${yellow}✵${green}100${yellow}✵ ${white}(${cyan}1${white}-${cyan}100${white})`));
+			message.channel.send(codeBlock(content,`${white}${modules.getNickname(message)}${green} rolls ${yellow}✵${green}100${yellow}✵ ${white}(${cyan}1${white}-${cyan}100${white})`));
 		else
-			message.channel.send(codeBlock(content,`${white}${message.author.username}${green} rolls ${calcColors(1, 100, val)}${val} ${white}(${cyan}1${white}-${cyan}100${white})`));
+			message.channel.send(codeBlock(content,`${white}${modules.getNickname(message)}${green} rolls ${calcColors(1, 100, val)}${val} ${white}(${cyan}1${white}-${cyan}100${white})`));
 	}
 }
 
 // When the command is called
-exports.run = (message, args, client) => {
+exports.run = (message, args) => {
 	roll(message, args);
 };
 
