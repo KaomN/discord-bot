@@ -6,7 +6,7 @@
 const { codeBlock } = require("@discordjs/builders");
 const fuzzysort = require("fuzzysort");
 const { green, cyan, white, yellow, red, blue } = require("../helpers/colors.js");
-const { GLOBAL_TIER_LIST_S1_GLYPH, GLOBAL_TIER_LIST_S1_XP, GLOBAL_TIER_LIST_S1_COMBINED } = require("../helpers/globals.js");
+const { GLOBAL_TIER_LIST_S1_GLYPH, GLOBAL_TIER_LIST_S1_XP, GLOBAL_TIER_LIST_S1_COMBINED, GLOBAL_TIER_LIST_EVENT } = require("../helpers/globals.js");
 
 exports.run = (message, args) => {
 	var output = ""
@@ -110,6 +110,14 @@ exports.run = (message, args) => {
 				message.channel.send(codeBlock(content, `${white}Could not find any results for: ${cyan}${search_word}\n${white}Try using a different search term or use !tier to see a list of available NM Dungeon tiers.`));
 				return;
 			}
+		}
+		else if ((args[0] == "event" || args[0] == "e") && args[1] == null) {
+			output += `${white}Events worth doing in NM dungeons:\n`;
+			for (var i = 0; i < GLOBAL_TIER_LIST_EVENT.length; i++) {
+				output += blue + (i + 1) + ": " + GLOBAL_TIER_LIST_EVENT[i] + "\n";
+			}
+			message.channel.send(codeBlock(content, output));
+			return;
 		}
 		else if (args[0] != null) {
 			const search_word = args.join(" ");
