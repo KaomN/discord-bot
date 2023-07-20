@@ -229,6 +229,14 @@ const GLOBAL_TIER_LIST_S1_COMBINED = [
 	"Halls of the Damned"
 ]
 
+const GLOBAL_TIER_LIST_EVENT = [
+	"Last stand",
+	"Cursed Chest",
+	"Cursed Well",
+	"Wandering Soul",
+	"Ritual of Blood"
+]
+
 module.exports = {
 	GLOBAL_TIER_LIST,
 	GLOBAL_TIER_LIST_XP,
@@ -236,5 +244,6 @@ module.exports = {
 	GLOBAL_TIER_LIST_COMBINED,
 	GLOBAL_TIER_LIST_S1_XP,
 	GLOBAL_TIER_LIST_S1_GLYPH,
-	GLOBAL_TIER_LIST_S1_COMBINED
+	GLOBAL_TIER_LIST_S1_COMBINED,
+	GLOBAL_TIER_LIST_EVENT
 };
