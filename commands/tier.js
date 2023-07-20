@@ -6,7 +6,7 @@
 const { codeBlock } = require("@discordjs/builders");
 const fuzzysort = require("fuzzysort");
 const { green, cyan, white, yellow, red, blue } = require("../helpers/colors.js");
-const { GLOBAL_TIER_LIST_GLYPH, GLOBAL_TIER_LIST_XP, GLOBAL_TIER_LIST_COMBINED } = require("../helpers/globals.js");
+const { GLOBAL_TIER_LIST_S1_GLYPH, GLOBAL_TIER_LIST_S1_XP, GLOBAL_TIER_LIST_S1_COMBINED } = require("../helpers/globals.js");
 
 exports.run = (message, args) => {
 	var output = ""
@@ -14,30 +14,30 @@ exports.run = (message, args) => {
 	try {
 		if (!args[0] || args[0] == "list"){
 			output += `${white}List of NM Dungeon tiers:\n`;
-			for (var i = 0; i < GLOBAL_TIER_LIST_COMBINED.length; i++) {
+			for (var i = 0; i < GLOBAL_TIER_LIST_S1_COMBINED.length; i++) {
 				if (i < 5)
-					output += blue + (i + 1) + ": " + GLOBAL_TIER_LIST_COMBINED[i] + "\n";
+					output += blue + (i + 1) + ": " + GLOBAL_TIER_LIST_S1_COMBINED[i] + "\n";
 				else if (i > 4 && i < 19)
-					output += green + (i + 1) + ": " + GLOBAL_TIER_LIST_COMBINED[i] + "\n";
+					output += green + (i + 1) + ": " + GLOBAL_TIER_LIST_S1_COMBINED[i] + "\n";
 				else if (i > 18 && i < 26)
-					output += yellow + (i + 1) + ": " + GLOBAL_TIER_LIST_COMBINED[i] + "\n";
+					output += yellow + (i + 1) + ": " + GLOBAL_TIER_LIST_S1_COMBINED[i] + "\n";
 				else
-					output += red + (i + 1) + ": " + GLOBAL_TIER_LIST_COMBINED[i] + "\n";
+					output += red + (i + 1) + ": " + GLOBAL_TIER_LIST_S1_COMBINED[i] + "\n";
 			}
 			message.channel.send(codeBlock(content, output));
 			return;
 		}
 		else if ((args[0] == "glyph" || args[0] == "-glyph" || args[0] == "g" || args[0] == "-g") && args[1] == null) {
 			output += `${white}List of Glyph leveling NM Dungeon tiers:\n`;
-			for (var i = 0; i < GLOBAL_TIER_LIST_GLYPH.length; i++) {
+			for (var i = 0; i < GLOBAL_TIER_LIST_S1_GLYPH.length; i++) {
 				if (i < 5)
-					output += blue + (i + 1) + ": " + GLOBAL_TIER_LIST_GLYPH[i] + "\n";
+					output += blue + (i + 1) + ": " + GLOBAL_TIER_LIST_S1_GLYPH[i] + "\n";
 				else if (i > 4 && i < 19)
-					output += green + (i + 1) + ": " + GLOBAL_TIER_LIST_GLYPH[i] + "\n";
+					output += green + (i + 1) + ": " + GLOBAL_TIER_LIST_S1_GLYPH[i] + "\n";
 				else if (i > 18 && i < 26)
-					output += yellow + (i + 1) + ": " + GLOBAL_TIER_LIST_GLYPH[i] + "\n";
+					output += yellow + (i + 1) + ": " + GLOBAL_TIER_LIST_S1_GLYPH[i] + "\n";
 				else
-					output += red + (i + 1) + ": " + GLOBAL_TIER_LIST_GLYPH[i] + "\n";
+					output += red + (i + 1) + ": " + GLOBAL_TIER_LIST_S1_GLYPH[i] + "\n";
 			}
 			message.channel.send(codeBlock(content, output));
 			return;
@@ -45,21 +45,21 @@ exports.run = (message, args) => {
 		else if ((args[0] == "glyph" || args[0] == "-glyph" || args[0] == "g" || args[0] == "-g") && args[1] != null) {
 			args.shift();
 			const search_word = args.join(" ");
-			result = fuzzysort.go(search_word, GLOBAL_TIER_LIST_GLYPH);
+			result = fuzzysort.go(search_word, GLOBAL_TIER_LIST_S1_GLYPH);
 			var output = ""
 			var found_index = null
 			if (result.total != 0){
 				output += `${white}Glyph Leveling Tier Dungeon:\n`;
 				for (var i = 0; i < result.total; i++) {
-					found_index = GLOBAL_TIER_LIST_GLYPH.indexOf(result[i].target);
+					found_index = GLOBAL_TIER_LIST_S1_GLYPH.indexOf(result[i].target);
 					if (found_index < 5)
-						output += blue + (found_index + 1) + ": " + GLOBAL_TIER_LIST_GLYPH[found_index] + "\n";
+						output += blue + (found_index + 1) + ": " + GLOBAL_TIER_LIST_S1_GLYPH[found_index] + "\n";
 					else if (found_index > 4 && found_index < 19)
-						output += green + (found_index + 1) + ": " + GLOBAL_TIER_LIST_GLYPH[found_index] + "\n";
+						output += green + (found_index + 1) + ": " + GLOBAL_TIER_LIST_S1_GLYPH[found_index] + "\n";
 					else if (found_index > 18 && found_index < 26)
-						output += yellow + (found_index + 1) + ": " + GLOBAL_TIER_LIST_GLYPH[found_index] + "\n";
+						output += yellow + (found_index + 1) + ": " + GLOBAL_TIER_LIST_S1_GLYPH[found_index] + "\n";
 					else
-						output += red + (found_index + 1) + ": " + GLOBAL_TIER_LIST_GLYPH[found_index] + "\n";
+						output += red + (found_index + 1) + ": " + GLOBAL_TIER_LIST_S1_GLYPH[found_index] + "\n";
 				}
 				message.channel.send(codeBlock(content, output));
 				return;
@@ -71,15 +71,15 @@ exports.run = (message, args) => {
 		}
 		else if ((args[0] == "-xp" || args[0] == "xp") && args[1] == null) {
 			output += `${white}List of XP/H NM Dungeon tiers:\n`;
-			for (var i = 0; i < GLOBAL_TIER_LIST_XP.length; i++) {
+			for (var i = 0; i < GLOBAL_TIER_LIST_S1_XP.length; i++) {
 				if (i < 5)
-					output += blue + (i + 1) + ": " + GLOBAL_TIER_LIST_XP[i] + "\n";
+					output += blue + (i + 1) + ": " + GLOBAL_TIER_LIST_S1_XP[i] + "\n";
 				else if (i > 4 && i < 19)
-					output += green + (i + 1) + ": " + GLOBAL_TIER_LIST_XP[i] + "\n";
+					output += green + (i + 1) + ": " + GLOBAL_TIER_LIST_S1_XP[i] + "\n";
 				else if (i > 18 && i < 26)
-					output += yellow + (i + 1) + ": " + GLOBAL_TIER_LIST_XP[i] + "\n";
+					output += yellow + (i + 1) + ": " + GLOBAL_TIER_LIST_S1_XP[i] + "\n";
 				else
-					output += red + (i + 1) + ": " + GLOBAL_TIER_LIST_XP[i] + "\n";
+					output += red + (i + 1) + ": " + GLOBAL_TIER_LIST_S1_XP[i] + "\n";
 			}
 			message.channel.send(codeBlock(content, output));
 			return;
@@ -87,21 +87,21 @@ exports.run = (message, args) => {
 		else if ((args[0] == "-xp" || args[0] == "xp") && args[1] != null) {
 			args.shift();
 			const search_word = args.join(" ");
-			result = fuzzysort.go(search_word, GLOBAL_TIER_LIST_XP);
+			result = fuzzysort.go(search_word, GLOBAL_TIER_LIST_S1_XP);
 			var output = ""
 			var found_index = null
 			if (result.total != 0){
 				output += `${white}XP/H Tier Dungeon:\n`;
 				for (var i = 0; i < result.total; i++) {
-					found_index = GLOBAL_TIER_LIST_XP.indexOf(result[i].target);
+					found_index = GLOBAL_TIER_LIST_S1_XP.indexOf(result[i].target);
 					if (found_index < 5)
-						output += blue + (found_index + 1) + ": " + GLOBAL_TIER_LIST_XP[found_index] + "\n";
+						output += blue + (found_index + 1) + ": " + GLOBAL_TIER_LIST_S1_XP[found_index] + "\n";
 					else if (found_index > 4 && found_index < 19)
-						output += green + (found_index + 1) + ": " + GLOBAL_TIER_LIST_XP[found_index] + "\n";
+						output += green + (found_index + 1) + ": " + GLOBAL_TIER_LIST_S1_XP[found_index] + "\n";
 					else if (found_index > 18 && found_index < 26)
-						output += yellow + (found_index + 1) + ": " + GLOBAL_TIER_LIST_XP[found_index] + "\n";
+						output += yellow + (found_index + 1) + ": " + GLOBAL_TIER_LIST_S1_XP[found_index] + "\n";
 					else
-						output += red + (found_index + 1) + ": " + GLOBAL_TIER_LIST_XP[found_index] + "\n";
+						output += red + (found_index + 1) + ": " + GLOBAL_TIER_LIST_S1_XP[found_index] + "\n";
 				}
 				message.channel.send(codeBlock(content, output));
 				return;
@@ -113,21 +113,21 @@ exports.run = (message, args) => {
 		}
 		else if (args[0] != null) {
 			const search_word = args.join(" ");
-			result = fuzzysort.go(search_word, GLOBAL_TIER_LIST_COMBINED);
+			result = fuzzysort.go(search_word, GLOBAL_TIER_LIST_S1_COMBINED);
 			var output = ""
 			var found_index = null
 			if (result.total != 0){
 				output += `${white}Combined Tier Dungeon:\n`;
 				for (var i = 0; i < result.total; i++) {
-					found_index = GLOBAL_TIER_LIST_COMBINED.indexOf(result[i].target);
+					found_index = GLOBAL_TIER_LIST_S1_COMBINED.indexOf(result[i].target);
 					if (found_index < 5)
-						output += blue + (found_index + 1) + ": " + GLOBAL_TIER_LIST_COMBINED[found_index] + "\n";
+						output += blue + (found_index + 1) + ": " + GLOBAL_TIER_LIST_S1_COMBINED[found_index] + "\n";
 					else if (found_index > 4 && found_index < 19)
-						output += green + (found_index + 1) + ": " + GLOBAL_TIER_LIST_COMBINED[found_index] + "\n";
+						output += green + (found_index + 1) + ": " + GLOBAL_TIER_LIST_S1_COMBINED[found_index] + "\n";
 					else if (found_index > 18 && found_index < 26)
-						output += yellow + (found_index + 1) + ": " + GLOBAL_TIER_LIST_COMBINED[found_index] + "\n";
+						output += yellow + (found_index + 1) + ": " + GLOBAL_TIER_LIST_S1_COMBINED[found_index] + "\n";
 					else
-						output += red + (found_index + 1) + ": " + GLOBAL_TIER_LIST_COMBINED[found_index] + "\n";
+						output += red + (found_index + 1) + ": " + GLOBAL_TIER_LIST_S1_COMBINED[found_index] + "\n";
 				}
 				message.channel.send(codeBlock(content, output));
 				return;
