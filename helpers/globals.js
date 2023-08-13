@@ -237,6 +237,74 @@ const GLOBAL_TIER_LIST_EVENT = [
 	"Ritual of Blood"
 ]
 
+// Patch 1.1.1
+const GLOBAL_TIER_LIST_S1_XP_v2 = [
+	"Uldur's Cave",
+	"Sarat's Lair",
+	"Mariner's refuge",
+	"Hoarfrost Demise",
+	"Immortal Emenation",
+	"Domhainne Tunnel",
+	"Mercy's Reach",
+	"Pallid Delve",
+	"Tomb of the Saints",
+	"Akhan's Grasp",
+	"Charnel House",
+	"Norstrava",
+	"Dead Man's Dredge",
+	"Forgotten Ruins",
+	"Komdor Temple",
+	"Ancient Reservoir",
+	"Collapsed Vault",
+	"Garan Hold",
+	"Stockades",
+	"Lost Keep",
+	"Twisted Hollow",
+	"Iron Hold",
+	"Betrayer's Row",
+	"Kor Valar Ramparts",
+	"Bastion of Faith",
+	"Shifting City",
+	"Faceless Shrine",
+	"Heretics Asylum",
+	"Path of the Blind",
+	"Halls of the Damned"
+]
+
+// Patch 1.1.1
+const GLOBAL_TIER_LIST_S1_GLYPH_v2 = [
+	"Hoarfrost Demise",
+	"Sarat's Lair",
+	"Mariner's refuge",
+	"Iron Hold",
+	"Mercy's Reach",
+	"Twisted Hollow",
+	"Uldur's Cave",
+	"Bastion of Faith",
+	"Garan Hold",
+	"Shifting City",
+	"Immortal Emenation",
+	"Domhainne Tunnel",
+	"Norstrava",
+	"Heretics Asylum",
+	"Pallid Delve",
+	"Collapsed Vault",
+	"Komdor Temple",
+	"Kor Valar Ramparts",
+	"Stockades",
+	"Ancient Reservoir",
+	"Tomb of the Saints",
+	"Dead Man's Dredge",
+	"Faceless Shrine",
+	"Path of the Blind",
+	"Forgotten Ruins",
+	"Charnel House",
+	"Betrayer's Row",
+	"Akhan's Grasp",
+	"Lost Keep",
+	"Halls of the Damned"
+]
+
 module.exports = {
 	GLOBAL_TIER_LIST,
 	GLOBAL_TIER_LIST_XP,
@@ -245,5 +313,7 @@ module.exports = {
 	GLOBAL_TIER_LIST_S1_XP,
 	GLOBAL_TIER_LIST_S1_GLYPH,
 	GLOBAL_TIER_LIST_S1_COMBINED,
-	GLOBAL_TIER_LIST_EVENT
+	GLOBAL_TIER_LIST_EVENT,
+	GLOBAL_TIER_LIST_S1_XP_v2,
+	GLOBAL_TIER_LIST_S1_GLYPH_v2
 };
