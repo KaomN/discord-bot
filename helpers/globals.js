@@ -305,6 +305,73 @@ const GLOBAL_TIER_LIST_S1_GLYPH_v2 = [
 	"Halls of the Damned"
 ]
 
+const GLOBAL_TIER_LIST_S2_XP = [
+	"Sirocco Caverns",
+	"Flooded Depths",
+	"Lights Watch",
+	"Belfry Zakara",
+	"Jalals Vigil",
+	"Ghoa Ruins",
+	"Carrion Fields",
+	"Buried Halls",
+	"Vault of the Forsaken",
+	"Sanguine Chapel",
+	"Grinning Labyrinth",
+	"Deserted Underpass",
+	"Forbidden City",
+	"Steadfast Barracks",
+	"Broken Bulwark",
+	"Lubans Rest",
+	"Conclave",
+	"Tormented Ruins",
+	"Oldstones",
+	"Bloodsoaked Crag",
+	"Fetid Mausoleum",
+	"Crusaders Cathedral",
+	"Inferno",
+	"Renegades Retreat",
+	"Whispering Vault",
+	"Sepulcher of the Forsworn",
+	"Leviathans Maw",
+	"Heathens Keep",
+	"Endless Gates",
+	"Hallowed Ossuary"
+]
+
+// Patch 1.1.1
+const GLOBAL_TIER_LIST_S2_GLYPH = [
+	"Ghoa Ruins",
+	"Tormented Ruins",
+	"Sirocco Caverns",
+	"Hallowed Ossuary",
+	"Belfry Zakara",
+	"Lights Watch",
+	"Deserted Underpass",
+	"Flooded Depths",
+	"Crusaders Cathedral",
+	"Forbidden City",
+	"Heathens Keep",
+	"Jalals Vigil",
+	"Broken Bulwark",
+	"Sanguine Chapel",
+	"Inferno",
+	"Vault of the Forsaken",
+	"Renegades Retreat",
+	"Fetid Mausoleum",
+	"Whispering Vault",
+	"Carrion Fields",
+	"Steadfast Barracks",
+	"Leviathans Maw",
+	"Oldstones",
+	"Bloodsoaked Crag",
+	"Grinning Labyrinth",
+	"Endless Gates",
+	"Lubans Rest",
+	"Conclave",
+	"Sepulcher of the Forsworn",
+	"Buried Halls"
+]
+
 module.exports = {
 	GLOBAL_TIER_LIST,
 	GLOBAL_TIER_LIST_XP,
@@ -315,5 +382,7 @@ module.exports = {
 	GLOBAL_TIER_LIST_S1_COMBINED,
 	GLOBAL_TIER_LIST_EVENT,
 	GLOBAL_TIER_LIST_S1_XP_v2,
-	GLOBAL_TIER_LIST_S1_GLYPH_v2
+	GLOBAL_TIER_LIST_S1_GLYPH_v2,
+	GLOBAL_TIER_LIST_S2_XP,
+	GLOBAL_TIER_LIST_S2_GLYPH
 };
