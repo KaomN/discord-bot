@@ -64,12 +64,22 @@ exports.run = async (message, args) => {
     return message.reply("You need to reply to a message to use this command.")
   }
 
+  if (repliedTo.attachments) {
+    var attachment = repliedTo.attachments.first()
+  }
+
   var date = new Date()
   date.setSeconds(date.getSeconds() + (timeAmount * convertTimeUnitToSeconds(timeUnit)))
 
   const job = schedule.scheduleJob(date, function() {
-    message.reply('Reminding you about message:\n' + repliedTo.content)
+    if (repliedTo.attachments) {
+      return message.reply({content:'Reminding you about message:\n', files:[{attachment: attachment.url, name: attachment.name}]})
+    }
+    else {
+      return message.reply('Reminding you about message:\n' + repliedTo.content)
+    }
   });
+
 }
 
 exports.help = {
